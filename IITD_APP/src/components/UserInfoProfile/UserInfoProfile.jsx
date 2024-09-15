@@ -126,12 +126,22 @@ function UserProfileForm() {
                   placeholder="Enter Skills"
                 />
               </div>
+              <div className="mb-4 cursor-pointer">
+                <label className="block text-gray-700 font-bold " htmlFor="skills">
+                  Profile Img
+                </label>
+                <Field
+                  type="file"
+                  name="profileIMG"
+                  className="w-full px-3 py-2 border-b-2 border-gray-300 focus:border-blue-500 rounded-md outline-none"
+                />
+              </div>
 
               <button
                 type="submit"
                 className="w-full py-2 bg-blue-500 text-white font-bold rounded-md hover:bg-blue-600"
               >
-                Sign Up
+               Submit
               </button>
             </Form>
           </div>
