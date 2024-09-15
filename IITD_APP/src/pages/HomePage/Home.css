@@ -1,0 +1,171 @@
+
+
+.navbar{
+    height: 60px;
+    width: 100%;
+    background-color: rgb(255, 255, 255);
+    border-bottom: 2px solid rgb(241, 239, 239);
+    display: flex;
+    align-items: center;
+    
+}
+.nav-icon{
+    font-family:Impact, 'Arial Narrow Bold';
+    color: rgb(0, 98, 255);
+    font-size: 25px;
+    /* padding-top: 15px; */
+    padding-left: 150px;
+    letter-spacing: 0.5px; 
+
+}
+.nav-right-icons{
+    width: 140px;
+    height: 50px;
+    /* background-color: aqua; */
+    display: flex;
+    align-items: center;
+    justify-content: space-evenly;
+    margin-right: 20px;
+}
+.nav-right-icons i{
+    font-size: 20px;
+}
+.span-icon{
+    font-size: 25px;
+    color: rgb(18, 78, 181);
+    
+}
+
+.footer{
+    height: 100px;
+}
+.body{
+    display: flex;
+    align-items: center;
+    justify-content: space-around;
+}
+.body-content{
+    height: 500px;
+    /* background-color: blueviolet; */
+}
+.content{
+    /* background-color: antiquewhite; */
+    width: fit-content;
+    padding-top: 150px;
+    /* padding-left: 270px; */
+}
+
+.content h1, p{
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+}
+.content h1{
+    font-size: 52px;
+    font-weight: 800;
+}
+.button{
+    height: 43px;
+    width: 135px;
+    background-color: rgb(18, 78, 181);
+    color: aliceblue;
+    font-size: 13px;
+    margin-left: 270px;
+    margin-top: 40px;
+    border-radius: 5px;
+    letter-spacing: 0.75px;
+    box-shadow: none;
+    border-style: none;
+    outline: none;
+    cursor: pointer;
+}
+/* -------------------------------------------------------------------------------------------- */
+
+ /* Second Page  */
+          
+/* -------------------------------------------------------------------------------------------- */
+
+/* Styles for all grid boxes */
+.grid-box {
+    background-color: #f0f0f0;
+    /* padding: 20px; */
+    text-align: center;
+    height: 200px;
+    width: 300px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+/* Styles specifically for the grid in the second page */
+.grid {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 50px 20px;
+    align-items: center;
+    justify-content: center;
+    margin-left: 60px;
+    margin-top: 70px;
+}
+
+
+.heading h1{
+    font-family: Arial, Helvetica, sans-serif;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    font-size: 30px;
+    color: rgb(21, 21, 21) ;
+    margin-top: 70px;
+}
+.heading p{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    margin-top: 10px;
+}
+.gb-1{
+    /* background-image: url("https://techvify-software.com/wp-content/uploads/2023/08/5-best-free-ecommerce-flatform.png"); */
+    background-size: cover;
+    background-repeat: no-repeat;
+    background-position: center;
+    
+    
+}
+/* ---------------------------------- */
+
+.how2create{
+    height: auto;
+    width: 100%;
+    margin-top: 3rem;
+}
+.how2create h2{
+    font-size: 2rem;
+    font-weight: 700;
+}
+.hc1{
+    height: 25rem;
+    width: 90%;
+    margin-left: 5%;
+    border-radius: 10px;
+    background-color: aliceblue;
+}
+.offer{
+    height: auto;
+    width: 100%;
+    margin-top: 6rem;
+    
+}
+.offer h3{
+    font-size: 3rem;
+    font-weight: 700;
+    
+    padding-left: 4rem;
+}
+.offer p{
+    padding: 4rem;
+    font-size: 1.2rem;
+}
+.video{
+    height: 100%;
+    width: 20%;
+    background-color: aqua;
+}
