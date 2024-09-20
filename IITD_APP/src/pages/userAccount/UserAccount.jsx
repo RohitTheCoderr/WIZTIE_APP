@@ -5,7 +5,7 @@ import ProjectTable from '@/components/UserDataTable/UserTable';
 import UserInfoCard from '@/components/UserInfoCard/UserInfoCard';
 import SideNavbar from '@/layouts/SideNavbar/SideNavbar';
 import { getData } from '@/services/apiCall';
-import { useGetUserdata } from '@/services/zustandStore';
+import { useGetProfileUserdata, useGetUserdata } from '@/services/zustandStore';
 import { useEffect } from 'react';
 import { Link, Outlet } from 'react-router-dom';
 
@@ -19,51 +19,43 @@ function UserAccount() {
             month: 'long',    // "August"
             day: 'numeric'    // "25"
         });
-
         return formattedDate;
     };
-// 
 
+    const { userProfileData, setUserProfiledata } = useGetProfileUserdata((state) => state);
+    useEffect(() => {
+        async function getSingleUserData() {
+            try {
+                const userdataPromise = await getData("/user/profile/");
+                if (userdataPromise?.data?.userProfiles[0]) {
+                    setUserProfiledata(userdataPromise.data.userProfiles[0])  
+                }
+            } catch (error) {
+                console.log('error in this page ', error)
+            }
+        }
+        getSingleUserData();
+    }, [setUserProfiledata]);
 
+    // async function getUserData() {
+    //     try {
+    //         const userdataPromise = getData("/user/user_data");
+    //         const userdata = await userdataPromise;
+    //         setUserdata(userdata);
+    //         console.log("User data received", userdata);
+    //     } catch (error) {
+    //         console.log('error in this page ', error)
+    //     }
+    // }
 
-const { userData, setUserdata } = useGetUserdata((state) => state);
-
-// const [userdata, setUserdata] = useState(null);
-
-useEffect(() => {
-    getUserData();
-}, []);
-
-async function getUserData() {
-    try {
-        const userdataPromise = getData("/user/user_data");
-        const userdata = await userdataPromise;
-        setUserdata(userdata);
-        console.log("User data received", userdata);
-    } catch (error) {
-        console.log('error in this page ', error)
-    }
-}
-
-console.log(userData);
-
-
-const { name, phoneNumber, email } = userData?.data || {};
-
-// Splitting the name string by spaces into an array
-// let arr = name ? name.split(" ") : []; 
-// let firstName = arr[0] || "N/A";
-// let middleName = arr.length === 3 ? arr[1] : null;
-// let lastName = arr.length === 3 ? arr[2] : arr.slice(1).join(" ") || "N/A";
-// 
-
+    const { fullName} = userProfileData || {};
     return (
         <div className='h-[86vh] w-full m-auto flex justify-between bg-gray-100 '>
             <SideNavbar />
             <div className='w-[81vw] overflow-scroll scrollbar-hide '>
                 <div className='w-full pl-12 py-3 h-[5rem]  bg-gray-100'>
                     <h3 className='capitalize caret-pink-500 text-xl font-bold'>
-                        Welcome to <span>{name}</span>
+                        Welcome to <span>{fullName}</span>
                     </h3>
                     <div className="text-sm">
                         {CurrentDate()}
@@ -71,10 +63,9 @@ const { name, phoneNumber, email } = userData?.data || {};
                 </div>
                 <div>
                     <div className=' flex gap-12 my-4'>
-                        <UserInfoCard />
-                        <Outlet/>
+                        <UserInfoCard profile={userProfileData} />
+                        <Outlet />
                     </div>
-
                 </div>
             </div>
         </div>

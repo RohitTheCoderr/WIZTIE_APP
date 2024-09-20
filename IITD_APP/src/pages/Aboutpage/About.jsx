@@ -1,6 +1,7 @@
 // import TeamSection from '../../components/cards/aboutcusTrustcards/Ourteam'
 // import Abouttrustcard from '../../components/cards/aboutcusTrustcards/Abouttrustcard'
 // import Trustcard from '@/components/cards/customerTrustcard/Trustcard'
+import AboutMainImg from "@/assets/images/footerImages/assests (2)/girlG.png"
 function About() {
     const aboutmainImg = "https://s3-alpha-sig.figma.com/img/fcc8/9aaa/7b85f8c1dcce81e71e2eb178be13bd4d?Expires=1722816000&Key-Pair-Id=APKAQ4GOSFWCVNEHN3O4&Signature=BwHd84ktT1n-BhjX8HhzVtrvsH6RLRdS983M3Tz8eQDcvNZOXmZD6Sa0bce0TYwb5GM3AW0O2~US5TSCrk4a8CGjJ-KiYRhf2FWBgUe24gXwcKP47YflX6Bz8PkuaWVcx9praTqi0eNyh58eQ9LC4iof~BkwoOTqCSsOFTZbrfuqvcAhsEljcwJnSa7Mm5~ezNAMyJTz3qILzsGYaAIivQgdi0SXidNqFekMgW35SHocppaq2N9MC-OARmPB56oiiLLxcWRTLc7C~W1y1UHX3nSsEE5to~r2-BrD2TNw4I1VOc6moZDceyH2QPwQK3OFos407zHlseSMYICunmPMxg__"
     return (
@@ -13,7 +14,7 @@ function About() {
                 </div>
 
                 <div className='w-[95vw] sm:w-[90vw] md:w-[45vw]  lg:w-[48vw] xl:w-[48vw] h-auto'>
-                    <img className="rounded-[0.25rem] " src={aboutmainImg} alt="Login" />
+                    <img className="rounded-[0.25rem] " src={AboutMainImg} alt="Login" />
                 </div>
             </div>
             {/* <div className='my-[5rem]'><Abouttrustcard /> </div> */}

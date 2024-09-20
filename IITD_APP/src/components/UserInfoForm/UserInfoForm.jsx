@@ -45,6 +45,7 @@ const technologyOptions = [
   { value: 'JavaScript', label: 'JavaScript' },
   { value: 'Java', label: 'Java' },
   { value: 'C++', label: 'C++' },
+  { value: 'MERN', label: 'MERN' },
 ];
 
 const DataForm = () => {

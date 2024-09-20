@@ -132,7 +132,7 @@ const sendMessageForm = {
   },
   validationSchema: Yup.object({
     name: nameValidate,
-    phone: phoneNumberOrEmailValidate,
+    phone: phoneNumberValidate,
     email: phoneNumberOrEmailValidate,
     textarea: textareaValidate,
   }),
@@ -230,8 +230,6 @@ const uploadFolder={
   }),
 }
 
-
-
 //  for order form
 
 const orderForm = {
@@ -259,5 +257,63 @@ const UserForm={
   }),
 }
 
-export { LoginForm, signUpForm, otpForm, sendMessageForm,changePassword,updateAddemailPhoneNumber, productUpload, billingAddress,updateName,orderForm, uploadFolder, UserForm };
+
+const UserProfiledata= {
+  initialValues: {
+    fullName: "",
+    Gender: "",
+    DOB: "",
+    email: "",
+    PhoneNumber: "",
+    Address: "",
+    city: "",
+    aboutMsg: "",
+    education: "",
+    position: "",
+    service: "",
+    careerBreak: "",
+    skills: "",
+    profileImg: "",
+    lindinProfileLink: "",
+    instagramProfileLink: "",
+  },
+
+  validationSchema: Yup.object({
+    fullName: Yup.string().required("Full Name is required").min(3, "Full Name must be at least 3 characters long"),
+    
+    Gender: Yup.string().required("Gender is required"),
+    
+    DOB: Yup.date().required("Date of Birth is required").nullable().typeError("Invalid date format"),
+    
+    email: Yup.string().required("Email is required").email("Invalid email format"),
+    
+    PhoneNumber:phoneNumberValidate,
+    
+    Address: Yup.string().required("Address is required"),
+    
+    city: Yup.string().required("City is required"),
+    
+    aboutMsg: Yup.string().max(500, "About message must be less than 500 characters"),
+    
+    education: Yup.string().required("Education is required"),
+    
+    position: Yup.string().required("Position is required"),
+    
+    service: Yup.string().required("Service is required"),
+    
+    careerBreak: Yup.string(),
+    
+    skills: Yup.string().required("Skills are required"),
+    
+    profileImg:Yup.string().required("product image is required"),
+    
+    lindinProfileLink: Yup.string().url("LinkedIn profile must be a valid URL"),
+    
+    instagramProfileLink: Yup.string().url("Instagram profile must be a valid URL"),
+  }),
+};
+
+
+
+export { LoginForm, signUpForm, otpForm, sendMessageForm,changePassword,updateAddemailPhoneNumber, productUpload, billingAddress,updateName,orderForm, uploadFolder, UserForm ,UserProfiledata};
 

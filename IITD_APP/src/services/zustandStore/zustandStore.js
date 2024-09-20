@@ -48,6 +48,35 @@ const useGetUserdata = create(
 );
 
 
+const getUserProfiledata = (set) => ({
+  userProfileData: "",
+  setUserProfiledata: (userProfileData) => set({ userProfileData }),
+});
+
+
+const useGetProfileUserdata = create(
+  devtools(getUserProfiledata, {
+    name: "userProfileData",
+    getStorage: () => localStorage,
+  })
+);
+
+
+
+const getAllUserProfiledata = (set) => ({
+  alluserProfileData: [],
+  setAllUserProfiledata: (alluserProfileData) => set({ alluserProfileData }),
+});
+
+
+const useGetALLProfileUserdata = create(
+  devtools(getAllUserProfiledata, {
+    name: "alluserProfileData",
+    getStorage: () => localStorage,
+  })
+);
+
+
 const getShow = (set) => ({
   show: false,
   setShow: (show) => set({ show }),
@@ -63,7 +92,7 @@ const useGetShow = create(
 
 
 ///////  Exports /////////////////////////
-export { useAuthStore, useGetCount, useGetUserdata, useGetShow };
+export { useAuthStore, useGetCount, useGetUserdata,useGetProfileUserdata, useGetShow ,useGetALLProfileUserdata };
 
 /* 
 get().state --> useful when work conditional state

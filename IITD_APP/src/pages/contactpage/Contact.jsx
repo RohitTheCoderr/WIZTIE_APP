@@ -7,8 +7,9 @@ import {sendMessageForm } from "@/services/lib/YupFormikValidator";
 
 function Contact() {
    function sendMessage(values, actions) {
-    alert("Send Message Successfully ...!", values)
+       console.log(values);
     actions.resetForm();
+    
    }
 
 
@@ -24,8 +25,8 @@ function Contact() {
                 <div>
                     <div className='flex items-center gap-4 my-4 '> <div className='w-7 h-7 bg-[#db4444] rounded-[50%] flex justify-center items-center' ><MdOutlineEmail className='text-base text-white' /></div> <span className='text-sm font-four '>write to us</span></div>
                     <p className='text-[14px] my-2 '>Fill out our form and we will contact you within 24 hours.</p>
-                    <p className='text-[14px] leading-[1.7rem]'>Emails: customer@exclusive.com</p>
-                    <p className='text-[14px] leading-[1.7rem]'>Emails: support@exclusive.com</p>
+                    <p className='text-[14px] leading-[1.7rem]'>Emails: customer@wiztie.com</p>
+                    <p className='text-[14px] leading-[1.7rem]'>Emails: support@wiztie.com</p>
                 </div>
             </div>
             <div className='w-[90vw] m-auto sm:m-auto md:m-0 sm:w-[20rem] md:w-[50vw]  '>

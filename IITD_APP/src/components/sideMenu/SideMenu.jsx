@@ -10,20 +10,20 @@ function SideMenu() {
         <div className='w-[96%]  '>
             <div className='text-gray-800 font-semibold my-4'>Menu</div>
             <div>
-                <div className='flex gap-4 items-center text-gray-400 hover:text-purple-400  my-4 '>
-                    <Link to={"/useraccount/users"}>
+                <div className='flex gap-4 items-center text-gray-400 hover:text-[#55AD9B]  my-4 '>
+                    <Link to={"/useraccount/users"} className='flex gap-4 items-center'>
                         <div className='cursor-pointer' ><FaUser className='text-2xl ' /></div>
                         <div className='text-[15px] cursor-pointer'>Users</div>
                     </Link>
                 </div>
-                <div className='flex gap-4 items-center text-gray-400 hover:text-purple-400  my-4 '>
-                    <Link to={"/useraccount/editprofile"}>
+                <div className='flex gap-4 items-center text-gray-400 hover:text-[#55AD9B]  my-4 '>
+                    <Link to={"/useraccount/editprofile"} className='flex gap-4 items-center'>
                         <div className='cursor-pointer' ><FaEdit className='text-2xl ' /></div>
                         <div className='text-[15px] cursor-pointer'>Edit Profile</div>
                     </Link>
                 </div>
-                <div className='flex gap-4 items-center text-gray-400 hover:text-purple-400  my-4 '>
-                    <div className='cursor-pointer' ><CiSettings className='text-3xl ' /></div>
+                <div className='flex gap-4 items-center text-gray-400 hover:text-[#55AD9B] my-4 '>
+                    <div className='cursor-pointer' ><CiSettings className='text-3xl b ' /></div>
                     <div className='text-[15px] cursor-pointer'>Setting</div>
                 </div>
 
