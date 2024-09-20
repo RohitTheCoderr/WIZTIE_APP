@@ -58,8 +58,6 @@ const checkAccountExist: RequestHandler = async (req: Request, res: Response, ne
 }
 
 
-
-
 //////////////////////////
 const signUpController: RequestHandler = async (req: Request, res: Response, next: NextFunction) => {
   try {
@@ -159,10 +157,8 @@ const deleteAllUserController: RequestHandler = async (req: Request, res: Respon
 }
 
 
-
-
-
 //////////////////////////  
+
 const updatePhoneOrEmailController: RequestHandler = async (req: Request, res: Response, next: NextFunction) => {
   try {
     let userData = await updatePhoneOrEmailValidator.validateAsync(req.body);

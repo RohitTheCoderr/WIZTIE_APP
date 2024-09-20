@@ -16,7 +16,8 @@ const generateToken: RequestHandler = (req: Request, res: Response, next: NextFu
     const token = jwtGetToken(userId);
 
     logger.info("generateToken ends", { __filename });
-
+ console.log("tokeneee", token);
+ 
     res.status(StatusCodes.ACCEPTED).json({ success: true, message: "token generated successfully", data: { token: token } })
   } catch (error) {
     logger.error(`generateToken error ${error}`, { __filename });

@@ -7,11 +7,24 @@ function required_String_NotEmpty(fieldName: string) {
     });
 }
 
+// // Function to validate either a string (URL) or a file
+// function required_FileOrString(fieldName: string) {
+//     return Joi.alternatives()
+//         .try(Joi.string(), Joi.object().instance(File))
+//         .messages({
+//             'alternatives.match': `${fieldName} must be either a URL or a file`,
+//         });
+// }
+
+
+
+
 const fullName = required_String_NotEmpty("fullName");
 const streetName = required_String_NotEmpty("streetName");
 const aprtmentOrFloor = required_String_NotEmpty("aprtmentOrFloor");
 const townOrCity = required_String_NotEmpty("townOrCity");
 const PhoneNumber = required_String_NotEmpty("PhoneNumber");
+
 
 const address = {
     fullName,
@@ -21,4 +34,46 @@ const address = {
     PhoneNumber,
 }
 
-export { required_String_NotEmpty, address }
+//  for userProfile data
+
+const Gender = required_String_NotEmpty("Gender");
+const DOB = required_String_NotEmpty("DOB");
+const email = required_String_NotEmpty("email");
+const Address = required_String_NotEmpty("address");
+const city = required_String_NotEmpty("city");
+const aboutMsg = required_String_NotEmpty("aboutMsg");
+const education = required_String_NotEmpty("education");
+const position = required_String_NotEmpty("position");
+const service = required_String_NotEmpty("service");
+const careerBreak = required_String_NotEmpty("careerBreak");
+const skills = required_String_NotEmpty("skills");
+// const profileImg = [required_FileOrString("profileImg")];
+const profileImg = Joi.array().items(Joi.object({
+    data: required_String_NotEmpty('data'),
+    contentType: required_String_NotEmpty('contentType')
+ 
+}))
+const lindinProfileLink = required_String_NotEmpty("linkedinProfileLink");
+const instagramProfileLink = required_String_NotEmpty("instagramProfileLink");
+
+const userprofile = {
+    fullName,
+    Gender,
+    DOB,
+    email,
+    PhoneNumber,
+    Address,
+    city,
+    aboutMsg,
+    education,
+    position,
+    service,
+    skills,
+    profileImg,
+    careerBreak,
+    lindinProfileLink,
+    instagramProfileLink,
+}
+
+
+export { required_String_NotEmpty , address , userprofile}

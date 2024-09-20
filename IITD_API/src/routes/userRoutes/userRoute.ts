@@ -2,7 +2,7 @@ import express from "express";
 import {
     sendSignUpOTPRoute, loginRoute, signUpRoute, sendForgetOTPRoute,
     passwordChangeRoute, updatePhoneOrEmailRoute, sendUpdatePhoneOrEmailRoute,
-    userDataRoute, updateNameRoute, userAddress
+    userDataRoute, updateNameRoute, userAddress, userProfile
 } from "@src/routes/userRoutes"
 
 import { deleteAllUserController } from "@src/controllers"
@@ -35,6 +35,9 @@ router.use("/update_Name", updateNameRoute)
 
 // address CRUD
 router.use("/address", userAddress)
+
+// user profile CRUD
+router.use("/profile", userProfile)
 
 export { router as userRoute };
 
