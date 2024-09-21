@@ -1,11 +1,13 @@
 import { getData, postData } from "@/services/apiCall";
 import { useGetALLProfileUserdata, useGetProfileUserdata } from "@/services/zustandStore";
-import React, { useEffect } from "react";
+import React, { useEffect, useState } from "react";
 import { BsDice4Fill } from "react-icons/bs";
 
 function Connection() {
     const { alluserProfileData, setAllUserProfiledata } = useGetALLProfileUserdata((state) => state);
-
+    const { userProfileData, setUserProfiledata } = useGetProfileUserdata((state) => state);
+    const [connectionStatus, setConnectionStatus] = useState({}); // Track connection status for each user
+  
     // Fetch data in useEffect when component mounts
     useEffect(() => {
         const fetchAllUserData = async () => {
@@ -13,8 +15,6 @@ function Connection() {
                 const userdataPromise = await getData("/user/profile/all_user_profile");
                 if (userdataPromise?.data?.userProfiles) {
                     setAllUserProfiledata(userdataPromise.data.userProfiles);
-                    console.log("all users", userdataPromise.data.userProfiles);
-
                 }
             } catch (error) {
                 console.error('Error fetching user profile data:', error);
@@ -24,26 +24,15 @@ function Connection() {
         fetchAllUserData();
     }, [setAllUserProfiledata]);
 
-    //  find user
-
-    const { userProfileData, setUserProfiledata } = useGetProfileUserdata((state) => state);
-
     async function getSingleUserData(userID) {
         if (!userID) {
             console.error("User ID is required");
             return;
         }
-
-        console.log("Fetching data for user ID:", userID);
-
         try {
             const response = await postData("/user/profile/find_user", { userId: userID });
-            console.log("my responce", response.data);
-
             if (response?.data?.userProfile[0]) {
                 const userProfile = response.data.userProfile[0];
-                console.log("User profile found:", userProfile);
-
                 // Set the fetched user profile data to Zustand
                 setUserProfiledata(userProfile);
             } else {
@@ -53,9 +42,43 @@ function Connection() {
             console.error("Error fetching user profile:", error);
         }
     }
+    
+    async function addConnection(userID) {
+        if (!userID) {
+            console.error("User ID is required");
+            return;
+        }
+        try {
+            const response = await postData("/user/profile/add_connection", {userID});
+            // setSuccess(response?.success)
+            if (response?.success) {
+                setConnectionStatus((prevState) => ({
+                    ...prevState,
+                    [userID]: true, // Mark the user as connected
+                }));
+            }
+        } catch (error) {
+            console.error("Error fetching user profile:", error);
+        }
+    }
 
-
-    // getSingleUserData(alluserProfileData?.userId)
+    async function deleteConnection(userID) {
+        if (!userID) {
+            console.error("User ID is required");
+            return;
+        }
+        try {
+            const response = await postData("/user/profile/delete_connection", {userID});
+            if (response?.success) {
+                setConnectionStatus((prevState) => ({
+                    ...prevState,
+                    [userID]: false, // Mark the user as not connected
+                }));
+            }
+        } catch (error) {
+            console.error("Error fetching user profile:", error);
+        }
+    }
 
     return (
         <>
@@ -64,10 +87,10 @@ function Connection() {
                 <div className="overflow-y-scroll overflow-x-hidden h-[31.2rem] scrollbar-hide">
                     {alluserProfileData && alluserProfileData.length > 0 ? (
                         alluserProfileData.map((data, index) => (
-                            <div onClick={() => {
-                                getSingleUserData(data?.userId); console.log("heloo", data?.userId);
-                            }} key={index} className="h-[5rem] w-[20rem] m-auto flex items-center justify-between py-2 cursor-pointer">
-                                <div className="flex gap-4">
+                            <div key={index} className="h-[5rem] w-[20rem] m-auto flex items-center justify-between py-2 cursor-pointer">
+                                <div onClick={() => {
+                                getSingleUserData(data?.userId);
+                                 }}  className="flex gap-4">
                                     <div className="h-[3.5rem] w-[3.5rem] bg-green-100 rounded-full">
                                         <img
                                             src={
@@ -84,7 +107,21 @@ function Connection() {
                                         <p className="text-[13px]">{data?.userProfile[0]?.position || "No position available"}</p>
                                     </div>
                                 </div>
-                                <button className="h-[2rem] w-[5rem] bg-[#55AD9B] rounded-md">Join</button>
+                                {!connectionStatus[data?.userId] ? (
+                                <button
+                                    onClick={() => addConnection(data?.userId)}
+                                    className="h-[2rem] w-[5rem] bg-[#55AD9B] rounded-md"
+                                >
+                                    Join
+                                </button>
+                            ) : (
+                                <button
+                                    onClick={() => deleteConnection(data?.userId)}
+                                    className="h-[2rem] w-[5rem] bg-[#ff8471] rounded-md"
+                                >
+                                    Disjoin
+                                </button>
+                            )}
                             </div>
                         ))
                     ) : (

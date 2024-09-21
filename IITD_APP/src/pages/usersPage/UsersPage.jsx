@@ -1,6 +1,6 @@
 import Connection from '@/components/UserConnection/Connection'
-import ProjectTable from '@/components/UserDataTable/UserTable'
-import UsersProfile from '@/components/UsersProfile/userProfile'
+import ProjectTable from '@/components/UserProjectTable/UserProjectTable'
+import UsersProfile from '@/components/UsersProfile/usersProfile'
 import SideNavbar from '@/layouts/SideNavbar/SideNavbar'
 import React from 'react'
 

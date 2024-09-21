@@ -11,19 +11,14 @@ import Home from './pages/HomePage/Home.jsx';
 import Forget_and_change_password from './pages/Forget_password/ForgetAndChangePassword.jsx';
 import UpdateAdd from './pages/Update_AddEmailphonenumber/UpdateAdd.jsx';
 import UserAccount from './pages/userAccount/UserAccount.jsx';
-import MyProfile from './components/userProfle/myAccount/myProfile/MyProfile.jsx';
-import UserprofileImg from './components/userProfle/userMainProfile/UserprofileImg.jsx';
-import { Address } from './components/userProfle/myAccount/AddressBook/Address.jsx';
 import CreateAddress from './components/createAddress/CreateAddress.jsx';
-import UpdateName from './components/updateName/UpdateName.jsx';
 import UsersPage from './pages/usersPage/UsersPage.jsx';
 import ChatWindow from './components/chatWindow/Chatwindow.jsx';
 import UploadDataProject from './components/uploadMainDiv/UploadProjectdata/UploadDataProject.jsx';
-import DataForm from './components/UserInfoForm/UserInfoForm.jsx';
-import UsersProfile from './components/UsersProfile/userProfile.jsx';
+import DataForm from './components/UserProjectForm/UserProjectForm.jsx';
 import Connection from './components/UserConnection/Connection.jsx';
-import UserProfileForm from './components/UserInfoProfile/UserInfoProfile.jsx';
-import UploadProject from './components/uploadProject/UploadProject.jsx';
+import UserProfileForm from './components/UserProfileForm/UserProfileForm.jsx';
+import MyConnections from './components/myConnections/MyConnections.jsx';
 
 const router = createBrowserRouter([
   {
@@ -90,6 +85,10 @@ const router = createBrowserRouter([
           {
             path: "/useraccount/editprofile",
             element: <UserProfileForm />
+          },
+          {
+            path: "/useraccount/myconnection",
+            element: <MyConnections />
           },
           {
             path: "/useraccount/users",

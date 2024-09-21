@@ -1,6 +1,6 @@
 
 import React from "react";
-import ProjectTable from "../UserDataTable/UserTable";
+import ProjectTable from "../UserProjectTable/UserProjectTable";
 import { FaLinkedin, FaInstagram, FaSquareWhatsapp } from "react-icons/fa6";
 import { useGetProfileUserdata } from "@/services/zustandStore";
 function UsersProfile() {

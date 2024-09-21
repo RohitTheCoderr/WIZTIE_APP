@@ -51,9 +51,9 @@ function Header() {
                 </div>
                 <nav className="hidden md:flex justify-around w-[35%]">
                     <CustomNavLink to="/">Home</CustomNavLink>
-                    <CustomNavLink to="/contact">Contact</CustomNavLink>
-                    <CustomNavLink to="/usersPage">UsersPage</CustomNavLink>
-                    <CustomNavLink to="/chatwindow">ChatWindow</CustomNavLink>
+                    <CustomNavLink to="/contact">Contact Us</CustomNavLink>
+                    <CustomNavLink to="/usersPage">Users</CustomNavLink>
+                    <CustomNavLink to="/chatwindow">ChatBot</CustomNavLink>
                     {isLoggedIn ? (
                         <NavLink
                             to="/"
@@ -94,8 +94,8 @@ function Header() {
                 <div className={`w-[87%] sm:w-[80%] flex justify-around sm:justify-start sm:gap-7 ${isMenuOpen ? 'block' : 'hidden'}`}>
                     <CustomNavLink to="/">Shop</CustomNavLink>
                     <CustomNavLink to="/contact">Contact</CustomNavLink>
-                    <CustomNavLink to="/usersPage">UsersPage</CustomNavLink>
-                    <CustomNavLink to="/chatwindow">ChatWindow</CustomNavLink>
+                    <CustomNavLink to="/usersPage">Users</CustomNavLink>
+                    <CustomNavLink to="/chatwindow">ChatBot</CustomNavLink>
                     {isLoggedIn ? (
                         <CustomNavLink
                             to="/"

@@ -1,7 +1,7 @@
 import UploadDiv from '@/components/UploadDiv/UploadDiv';
 import UploadDataProject from '@/components/uploadMainDiv/UploadProjectdata/UploadDataProject';
-import UploadProject from '@/components/uploadProject/UploadProject';
-import ProjectTable from '@/components/UserDataTable/UserTable';
+import UploadProject from '@/components/uploadProjectBtn/UploadProjectBtn';
+import ProjectTable from '@/components/UserProjectTable/UserProjectTable';
 import UserInfoCard from '@/components/UserInfoCard/UserInfoCard';
 import SideNavbar from '@/layouts/SideNavbar/SideNavbar';
 import { getData } from '@/services/apiCall';

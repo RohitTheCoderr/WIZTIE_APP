@@ -1,6 +1,6 @@
 import { useGetShow } from '@/services/zustandStore';
 import React from 'react';
-import DataForm from '../UserInfoForm/UserInfoForm';
+import DataForm from '../UserProjectForm/UserProjectForm';
 
 const projects = [
   { 

@@ -24,7 +24,7 @@ function SideProfile() {
                             ? `data:${userProfileData?.profileImg[0]?.contentType};base64,${userProfileData?.profileImg[0]?.data}`
                             : null}
                         alt={userProfileData?.fullName}
-                        className=' h-full w-full rounded-full '
+                        className=' h-full w-full bg-white rounded-full '
                     />
                 </div>
                 <div>

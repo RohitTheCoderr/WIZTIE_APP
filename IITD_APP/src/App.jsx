@@ -4,7 +4,7 @@ import { Outlet } from "react-router-dom"
 import Footer from "./layouts/Footer"
 import { ToastContainer } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
-import UserProfileForm from "./components/UserInfoProfile/UserInfoProfile";
+import UserProfileForm from "./components/UserProfileForm/UserProfileForm";
 // import DataForm from "./components/UserInfoForm/UserInfoForm";
 // import UserInfoCard from "./components/UserInfoCard/UserInfoCard";
 // import SideProfile from "./components/sideProfile/SideProfile";
