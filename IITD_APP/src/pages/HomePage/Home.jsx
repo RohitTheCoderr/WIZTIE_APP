@@ -18,8 +18,38 @@ import t12 from ".//..//../assets/homeImage/12.jpeg";
 import t13 from ".//..//../assets/homeImage/13.jpeg";
 import t14 from ".//..//../assets/homeImage/14.jpeg";
 import t15 from ".//..//../assets/homeImage/15.jpeg";
+import { useGetUserdata } from "@/services/zustandStore";
+import { useEffect } from "react";
+import { getData } from "@/services/apiCall";
 
 export default function Home() {
+
+
+  // for main user data with img
+  const { withimg, setWithimg } = useGetUserdata((state) => state);
+
+  useEffect(()=>{
+    getSingleUserData()
+  },[])
+  async function getSingleUserData() {
+   
+    try {
+        const response = await getData("/user/profile");
+        if (response?.data?.userProfiles[0]) {
+            const userProfile = response.data.userProfiles[0];
+            // Set the fetched user profile data to Zustand
+            setWithimg(userProfile);
+        } else {
+            console.log("No user profile found for the given user ID.");
+        }
+    } catch (error) {
+        console.error("Error fetching user profile:", error);
+    }
+}
+
+
+
+
   const ec =
     "https://www.bing.com/images/search?view=detailV2&ccid=JzWR2Bgi&id=2C729CBA9C7918A4673C2DCCFFE8FBF08861A6EE&thid=OIP.JzWR2BgiZ0DoQE6NxuDdDQHaFk&mediaurl=https%3A%2F%2Fwww.liveadmins.com%2Fwp-content%2Fuploads%2F2015%2F04%2Fecommerce-2015.jpg&exph=1203&expw=1600&q=ecommerce+&simid=608032765708299352&FORM=IRPRST&ck=43A966136E317D8E376DB5F26EA68940&selectedIndex=14&itb=0&cw=1375&ch=666&ajaxhist=0&ajaxserp=0";
   return (

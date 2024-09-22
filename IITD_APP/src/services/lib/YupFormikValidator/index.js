@@ -293,7 +293,7 @@ const UserProfiledata= {
     
     city: Yup.string().required("City is required"),
     
-    aboutMsg: Yup.string().max(500, "About message must be less than 500 characters"),
+    aboutMsg: Yup.string().required("Write About yourself").max(500, "About message must be less than 500 characters"),
     
     education: Yup.string().required("Education is required"),
     
@@ -301,15 +301,15 @@ const UserProfiledata= {
     
     service: Yup.string().required("Service is required"),
     
-    careerBreak: Yup.string(),
+    careerBreak: Yup.string().required("Required field"),
     
     skills: Yup.string().required("Skills are required"),
     
-    profileImg:Yup.string().required("product image is required"),
+    profileImg:Yup.string().required("Product image is required"),
     
-    lindinProfileLink: Yup.string().url("LinkedIn profile must be a valid URL"),
+    lindinProfileLink: Yup.string().url("LinkedIn profile must be a valid URL").required("Required field"),
     
-    instagramProfileLink: Yup.string().url("Instagram profile must be a valid URL"),
+    instagramProfileLink: Yup.string().url("Instagram profile must be a valid URL").required("Required field"),
   }),
 };
 

@@ -48,7 +48,7 @@ const technologyOptions = [
   { value: 'MERN', label: 'MERN' },
 ];
 
-const DataForm = () => {
+const UserProjectForm = () => {
   async function UserForm(values,action) {
     console.log('valuess',values)
     action.resetForm()
@@ -130,4 +130,4 @@ const DataForm = () => {
   );
 };
 
-export default DataForm;
+export default UserProjectForm;

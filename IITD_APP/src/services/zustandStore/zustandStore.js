@@ -36,16 +36,20 @@ const useGetCount = create(
 
 const getUserdata = (set) => ({
   userData: "",
+  withimg:"",
   setUserdata: (userData) => set({ userData }),
+  setWithimg:(withimg)=>set({withimg})
 });
 
 
 const useGetUserdata = create(
   devtools(getUserdata, {
     name: "userData",
-    getStorage: () => localStorage,
+    withimg:"withimg",
+    getStorage: () => sessionStorage,
   })
 );
+
 
 
 const getUserProfiledata = (set) => ({
@@ -96,7 +100,6 @@ const getShow = (set) => ({
   setShow: (show) => set({ show }),
 });
 
-
 const useGetShow = create(
   devtools(getShow, {
     name: "show",
@@ -104,9 +107,21 @@ const useGetShow = create(
   })
 );
 
+const getShowmore = (set) => ({
+  show: false,
+  setShowmore: (show) => set({ show }),
+});
+
+const useGetShowmore = create(
+  devtools(getShowmore, {
+    name: "show",
+    getStorage: () => localStorage,
+  })
+);
+
 
 ///////  Exports /////////////////////////
-export { useAuthStore, useGetCount, useGetUserdata,useGetProfileUserdata, useGetShow ,useGetALLProfileUserdata , useGettingMyConnectionsZustand};
+export { useAuthStore, useGetCount, useGetUserdata,useGetProfileUserdata, useGetShow ,useGetALLProfileUserdata , useGettingMyConnectionsZustand, useGetShowmore};
 
 /* 
 get().state --> useful when work conditional state

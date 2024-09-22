@@ -10,15 +10,14 @@ import LogInPage from './pages/LoginPage/LogInPage.jsx';
 import Home from './pages/HomePage/Home.jsx';
 import Forget_and_change_password from './pages/Forget_password/ForgetAndChangePassword.jsx';
 import UpdateAdd from './pages/Update_AddEmailphonenumber/UpdateAdd.jsx';
-import UserAccount from './pages/userAccount/UserAccount.jsx';
-import CreateAddress from './components/createAddress/CreateAddress.jsx';
-import UsersPage from './pages/usersPage/UsersPage.jsx';
+import MainProfile from './pages/mainProfilePage/MainProfile.jsx';
+import UsersPage from './components/mainProfileComponents/usersPage/UsersPage.jsx';
+import UserAccount from './components/mainProfileComponents/userAccount/UserAccount.jsx';
+import UploadDataProject from './components/mainProfileComponents/UploadProjectdata/UploadDataProject.jsx';
+import UserProjectForm from './components/UserProjectForm/UserProjectForm.jsx';
+import ChatWithCommections from './components/mainProfileComponents/ChatWithMyConnection/ChatWithCommections.jsx';
 import ChatWindow from './components/chatWindow/Chatwindow.jsx';
-import UploadDataProject from './components/uploadMainDiv/UploadProjectdata/UploadDataProject.jsx';
-import DataForm from './components/UserProjectForm/UserProjectForm.jsx';
-import Connection from './components/UserConnection/Connection.jsx';
-import UserProfileForm from './components/UserProfileForm/UserProfileForm.jsx';
-import MyConnections from './components/myConnections/MyConnections.jsx';
+import EditProfile from './components/mainProfileComponents/EditProfile/EditProfile.jsx';
 
 const router = createBrowserRouter([
   {
@@ -30,9 +29,41 @@ const router = createBrowserRouter([
         element: <Home />,
       },
       
+      // {
+      //   path: "/usersPage",
+      //   element: <UsersPage />
+      // },
       {
-        path: "/usersPage",
-        element: <UsersPage />
+        path:"/main_profile",
+        element:<MainProfile/>,
+        children:[
+          {
+            path:"/main_profile/userspage",
+            element:<UsersPage/>
+          },
+          {
+            path:"/main_profile/user_account",
+            element:<UserAccount/>,
+            children:[
+              {
+              path:"/main_profile/user_account",
+              element:<UploadDataProject/>
+              },
+              {
+                path:"/main_profile/user_account/user_projectForm",
+                element:<UserProjectForm/>
+              }
+            ]
+          },
+          {
+            path:"/main_profile/Chat_with_Commections",
+            element:<ChatWithCommections/>,
+          },
+          {
+            path:"/main_profile/edit_profile",
+            element:<EditProfile/>,
+          }
+        ]
       },
 
       {
@@ -63,44 +94,6 @@ const router = createBrowserRouter([
         path: "/updateAdd",
         element: <UpdateAdd />
       },
-      
-      {
-        path: "/useraccount",
-        element: <UserAccount />,
-        children: [
-          {
-            path: "/useraccount",
-            element: <UploadDataProject />,
-            // children:[
-            //   {
-            //     path:"/useraccount/uploaddatadroject/dataorm",
-            //     element:<DataForm/>
-            //   }
-            // ]
-          },
-          {
-            path: "/useraccount/dataform",
-            element: <DataForm />
-          },
-          {
-            path: "/useraccount/editprofile",
-            element: <UserProfileForm />
-          },
-          {
-            path: "/useraccount/myconnection",
-            element: <MyConnections />
-          },
-          {
-            path: "/useraccount/users",
-            element: <Connection />
-          },
-          {
-            path: "/useraccount/createaddress",
-            element: <CreateAddress />
-          },
-
-        ]
-      }
     ],
     // errorElement: <SomethingWentWrong />
   }

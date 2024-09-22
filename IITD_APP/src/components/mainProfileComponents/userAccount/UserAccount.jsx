@@ -1,13 +1,10 @@
-import UploadDiv from '@/components/UploadDiv/UploadDiv';
-import UploadDataProject from '@/components/uploadMainDiv/UploadProjectdata/UploadDataProject';
-import UploadProject from '@/components/uploadProjectBtn/UploadProjectBtn';
-import ProjectTable from '@/components/UserProjectTable/UserProjectTable';
 import UserInfoCard from '@/components/UserInfoCard/UserInfoCard';
-import SideNavbar from '@/layouts/SideNavbar/SideNavbar';
+import UserProjectForm from '@/components/UserProjectForm/UserProjectForm';
 import { getData } from '@/services/apiCall';
 import { useGetProfileUserdata, useGetUserdata } from '@/services/zustandStore';
 import { useEffect } from 'react';
-import { Link, Outlet } from 'react-router-dom';
+import {  Outlet } from 'react-router-dom';
+import UploadDataProject from '../UploadProjectdata/UploadDataProject';
 
 function UserAccount() {
 
@@ -48,27 +45,29 @@ function UserAccount() {
     //     }
     // }
 
+    const { withimg, setWithimg } = useGetUserdata((state) => state);
     const { fullName} = userProfileData || {};
     return (
-        <div className='h-[86vh] w-full m-auto flex justify-between bg-gray-100 '>
-            <SideNavbar />
-            <div className='w-[81vw] overflow-scroll scrollbar-hide '>
+        // <div className='h-[86vh] w-full m-auto flex justify-between bg-gray-100 '>
+        //     <SideNavbar />
+            // <div className=' w-[80%] mx-auto  overflow-scroll scrollbar-hide '>
+            <div className=' overflow-scroll scrollbar-hide '>
                 <div className='w-full pl-12 py-3 h-[5rem]  bg-gray-100'>
                     <h3 className='capitalize caret-pink-500 text-xl font-bold'>
-                        Welcome to <span>{fullName}</span>
+                        Welcome to <span>{withimg?.fullName}</span>
                     </h3>
                     <div className="text-sm">
                         {CurrentDate()}
                     </div>
                 </div>
-                <div>
-                    <div className=' flex gap-12 my-4'>
+                <div className=' '>
+                    <div className=' flex gap-12 flex-wrap my-4'>
                         <UserInfoCard profile={userProfileData} />
                         <Outlet />
                     </div>
                 </div>
             </div>
-        </div>
+        // </div>
     );
 }
 

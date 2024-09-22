@@ -14,21 +14,22 @@ function SideProfile() {
 
     const { userProfileData, setUserProfiledata } = useGetProfileUserdata((state) => state);
 
+    const { withimg, setWithimg } = useGetUserdata((state) => state);
     return (
         <div className=' font-semibold'>
             <div className='text-gray-800'>Profile</div>
             <div className='flex gap-3 items-center my-3'>
                 <div className='h-12 w-12 bg-black rounded-full'>
                     <img
-                        src={Array.isArray(userProfileData?.profileImg) && userProfileData?.profileImg[0]
-                            ? `data:${userProfileData?.profileImg[0]?.contentType};base64,${userProfileData?.profileImg[0]?.data}`
+                        src={Array.isArray(withimg?.profileImg) && withimg?.profileImg[0]
+                            ? `data:${withimg?.profileImg[0]?.contentType};base64,${withimg?.profileImg[0]?.data}`
                             : null}
-                        alt={userProfileData?.fullName}
+                        alt={withimg?.fullName}
                         className=' h-full w-full bg-white rounded-full '
                     />
                 </div>
                 <div>
-                    <h5 className='font-semibold text-[12px] uppercase'>{name}</h5>
+                    <h5 className='font-semibold text-[12px] uppercase'>{withimg?.name}</h5>
                     <p className='text-[12px] text-gray-600'>Admin account</p>
                 </div>
             </div>

@@ -82,7 +82,7 @@ function Connection() {
 
     return (
         <>
-            <div className="w-[25rem] bg-[#fffbfe] h-[35rem] float-right rounded-3xl">
+            <div className="w-[25rem]  bg-[#fffbfe] h-[35rem] float-right rounded-3xl">
                 <p className="text-2xl ml-9 py-2">Connection</p>
                 <div className="overflow-y-scroll overflow-x-hidden h-[31.2rem] scrollbar-hide">
                     {alluserProfileData && alluserProfileData.length > 0 ? (

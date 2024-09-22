@@ -52,16 +52,17 @@ function Header() {
                 <nav className="hidden md:flex justify-around w-[35%]">
                     <CustomNavLink to="/">Home</CustomNavLink>
                     <CustomNavLink to="/contact">Contact Us</CustomNavLink>
-                    <CustomNavLink to="/usersPage">Users</CustomNavLink>
+                    {/* <CustomNavLink to="/usersPage">Users</CustomNavLink> */}
+                    <CustomNavLink to="/main_profile/userspage">Users</CustomNavLink>
                     <CustomNavLink to="/chatwindow">ChatBot</CustomNavLink>
                     {isLoggedIn ? (
-                        <NavLink
+                        <CustomNavLink
                             to="/"
                             onClick={() => removeToken()}
                             className="text-white"
                         >
                             Logout
-                        </NavLink>
+                        </CustomNavLink>
                     ) : (
                         <CustomNavLink to="/login">Login</CustomNavLink>
                     )}
@@ -77,7 +78,7 @@ function Header() {
                     </div>
                     <div className="w-[22%] sm:w-[15%] md:w-[20%] lg:w-[15%] flex justify-around sm:justify-between md:justify-between lg:justify-start lg:gap-3 items-center">
 
-                        <NavLink to={"/useraccount"}>
+                        <NavLink to={"/main_profile/user_account"}>
                             <FaCircleUser className="text-sm sm:text-xl text-white" />
                         </NavLink>
                     </div>
@@ -92,9 +93,9 @@ function Header() {
                     )}
                 </button>
                 <div className={`w-[87%] sm:w-[80%] flex justify-around sm:justify-start sm:gap-7 ${isMenuOpen ? 'block' : 'hidden'}`}>
-                    <CustomNavLink to="/">Shop</CustomNavLink>
-                    <CustomNavLink to="/contact">Contact</CustomNavLink>
-                    <CustomNavLink to="/usersPage">Users</CustomNavLink>
+                    <CustomNavLink to="/">Home</CustomNavLink>
+                    <CustomNavLink to="/contact">Contact us</CustomNavLink>
+                    <CustomNavLink to="/main_profile/userspage">Users</CustomNavLink>
                     <CustomNavLink to="/chatwindow">ChatBot</CustomNavLink>
                     {isLoggedIn ? (
                         <CustomNavLink
