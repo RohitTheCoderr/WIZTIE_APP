@@ -241,11 +241,11 @@ function EditProfile() {
   } = withimg || {};
 
   return (
-    <div className="container mx-auto  p-6 bg-gray-100 rounded-xl shadow-lg overflow-scroll scrollbar-hide">
+    <div className="container mx-auto bg-transparent w-[82%] rounded-xl overflow-scroll scrollbar-hide pr-6 pt-12 ">
       <h2 className="text-3xl font-bold text-center text-gray-800 mb-6">Your Current Profile</h2>
 
       {/* Profile Picture and Name */}
-      <div className="  flex flex-col justify-center items-center ">
+      <div className=" flex flex-col justify-center items-center ">
         <div className="h-[6rem] bg-slate-50 w-[6rem] rounded-full overflow-hidden border">
           <img
             src={Array.isArray(profileImg) && profileImg[0] ?
@@ -259,10 +259,11 @@ function EditProfile() {
           <p className="text-lg text-gray-500">{position}</p>
         </div>
       </div>
+      {/* <div className="bg-violet-500 mx-auto "> */}
 
 
       {/* Contact Information */}
-        <div className="  grid grid-cols-1 sm:grid-cols-2 gap-4    mb-[-2rem]">
+        <div className="  mx-auto grid grid-cols-1 sm:grid-cols-2 gap-4    mb-[-2rem]">
           <InfoItem icon={<MdEmail className="text-green-600 text-3xl" />} label="Email" value={email} />
           <InfoItem icon={<BsTelephoneFill className="text-blue-600 text-3xl" />} label="Phone" value={PhoneNumber} />
           <InfoItem icon={<FaMapLocationDot className="text-red-600 text-3xl" />} label="Address" value={`${Address}, ${city}`} />
@@ -289,6 +290,7 @@ function EditProfile() {
           <InfoItem icon={<PiLinkSimpleBreakBold className="text-gray-600 text-3xl" />} label="Career Break" value={careerBreak} />
           <InfoItem icon={<MdEmail className="text-gray-500 text-3xl" />} label="About" value={aboutMsg} />
         </div>
+        {/* </div> */}
 
       {/* Edit Profile Form */}
       <div className="mt-8">

@@ -15,7 +15,7 @@ const CustomNavLink = ({ to, children, onClick, isActiveLink }) => (
         to={to}
         onClick={onClick}
         className={({ isActive }) =>
-            `text-[12px] sm:text-[0.5rem] md:text-[0.6rem] lg:text-[0.8rem] xl:text-[1rem] font-medium text-white relative after:content-[''] 
+            `text-[12px] md:text-[0.6rem] lg:text-[0.8rem] xl:text-[1rem] font-medium text-white relative after:content-[''] 
             after:absolute after:left-0 after:bottom-0 after:h-[1.3px] sm:after:h-[1.5px] md:after:h-[2px] after:w-1/2 after:bg-[#db4444] pb-[0.18rem] 
             ${isActive || isActiveLink ? 'after:block' : 'after:hidden'}`
         }
@@ -92,8 +92,8 @@ function Header() {
                         <HiMenu className="text-[1rem] sm:text-[1.2rem] md:text-2xl" />
                     )}
                 </button>
-                <div className={`w-[87%] sm:w-[80%] flex justify-around sm:justify-start sm:gap-7 ${isMenuOpen ? 'block' : 'hidden'}`}>
-                    <CustomNavLink to="/">Home</CustomNavLink>
+                <div className={`w-[87%] sm:w-[80%] flex justify-around md:justify-start  md:gap-7 ${isMenuOpen ? 'block' : 'hidden'}`}>
+                    <CustomNavLink  to="/">Home</CustomNavLink>
                     <CustomNavLink to="/contact">Contact us</CustomNavLink>
                     <CustomNavLink to="/main_profile/userspage">Users</CustomNavLink>
                     <CustomNavLink to="/chatwindow">ChatBot</CustomNavLink>

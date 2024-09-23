@@ -1,5 +1,6 @@
 import { useState } from 'react';
 import LoginImg from "@/assets/images/footerImages/loginImg.jpeg";
+import LoginImg1 from "@/assets/images/footerImages/studetimg.jpg";
 import { changePassword, otpForm } from "@/services/lib/YupFormikValidator";
 import { TextInput, Button } from '@/components/form';
 import { Formik, Form } from 'formik';
@@ -69,7 +70,7 @@ function ForgetAndChangePassword() {
     return (
         <div className='w-[100vw] md:w-[100vw] md:justify-around lg:w-[90vw] my-[3rem] h-auto flex flex-wrap items-center justify-center sm:justify-center lg:justify-between'>
             <div className='w-[90vw] sm:w-[80vw] md:w-[45vw] lg:w-[50vw] xl:w-[55vw] h-auto'>
-                <img className="rounded-[0.25rem]" src={LoginImg} alt="Login" />
+                <img className="rounded-[0.25rem]" src={LoginImg1} alt="Login" />
             </div>
             <div className='w-[15rem] mt-6 md:mt-0 sm:w-[20rem] md:w-[17rem] lg:w-[17rem] xl:w-[20rem] h-auto'>
                 <Formik

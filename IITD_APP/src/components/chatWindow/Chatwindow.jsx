@@ -46,7 +46,7 @@ const ChatWindow = () => {
   }, [messages, newMessage]);
 
   return (
-    <div className="flex flex-col my-0  m-auto border-2 h-[35rem] w-[50%] overflow-hidden rounded-2xl bg-slate-100">
+    <div className="flex flex-col my-0  m-auto border-2 h-[35rem] w-[35rem] overflow-hidden rounded-2xl bg-slate-100">
       <h2 className="text-xl text-center">Chat Bot</h2>
       <div className="flex-1 overflow-y-auto p-4 border-2">
         {messages.map((message, index) => (

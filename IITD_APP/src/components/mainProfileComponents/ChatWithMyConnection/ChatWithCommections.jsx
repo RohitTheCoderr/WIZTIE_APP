@@ -3,7 +3,7 @@ import MyConnections from '@/components/myConnections/MyConnections'
 
 function ChatWithCommections() {
   return (
-    <div className=' mt-12  flex gap-4 w-full justify-around'>
+    <div className=' overflow-scroll scrollbar-hide flex flex-wrap px-2 gap-6 pt-12'>
         <MyConnections/>
         <ChatWindow/>
     </div>

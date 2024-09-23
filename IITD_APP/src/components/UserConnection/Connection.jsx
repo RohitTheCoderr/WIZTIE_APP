@@ -82,16 +82,16 @@ function Connection() {
 
     return (
         <>
-            <div className="w-[25rem]  bg-[#fffbfe] h-[35rem] float-right rounded-3xl">
-                <p className="text-2xl ml-9 py-2">Connection</p>
-                <div className="overflow-y-scroll overflow-x-hidden h-[31.2rem] scrollbar-hide">
+            <div className="w-[25rem] max-w-md mx-auto  bg-[#fffbfe]  min-h-[25rem] sm:h-[35rem] float-right  rounded-lg sm:rounded-3xl">
+                <p className="text-md font-semibold sm:text-2xl ml-2 sm:ml-9 py-2 border-b-2">Connection</p>
+                <div className="overflow-y-scroll overflow-x-hidden h-auto sm:h-[31.2rem] scrollbar-hide">
                     {alluserProfileData && alluserProfileData.length > 0 ? (
                         alluserProfileData.map((data, index) => (
-                            <div key={index} className="h-[5rem] w-[20rem] m-auto flex items-center justify-between py-2 cursor-pointer">
-                                <div onClick={() => {
+                            <div key={index} className="h-[4rem] border-b-[1px] border-gray-200 sm:h-[5rem] w-[95%] sm:w-[20rem] m-auto flex items-center justify-between py-2 cursor-pointer">
+                                <div onClick={() => { 
                                 getSingleUserData(data?.userId);
                                  }}  className="flex gap-4">
-                                    <div className="h-[3.5rem] w-[3.5rem] bg-green-100 rounded-full">
+                                    <div className="h-[2.5rem] sm:h-[3.5rem] w-[2.5rem] sm:w-[3.5rem] bg-green-100 rounded-full">
                                         <img
                                             src={
                                                 Array.isArray(data?.userProfile[0]?.profileImg) && data?.userProfile[0]?.profileImg[0]
@@ -103,14 +103,14 @@ function Connection() {
                                         />
                                     </div>
                                     <div className="h-[3rem] w-[7rem]">
-                                        <h1 className="text-[16px]">{data?.userProfile[0]?.fullName || "Unnamed"}</h1>
-                                        <p className="text-[13px]">{data?.userProfile[0]?.position || "No position available"}</p>
+                                        <h1 className="text-[14px] sm:text-[16px] font-semibold">{data?.userProfile[0]?.fullName || "Unnamed"}</h1>
+                                        <p className="text-[11px] sm:text-[13px]">{data?.userProfile[0]?.position || "No position available"}</p>
                                     </div>
                                 </div>
                                 {!connectionStatus[data?.userId] ? (
                                 <button
                                     onClick={() => addConnection(data?.userId)}
-                                    className="h-[2rem] w-[5rem] bg-[#55AD9B] rounded-md"
+                                    className="h-[1.7rem] sm:h-[2rem] w-[4rem] sm:w-[5rem] text-[12px] bg-[#55AD9B] rounded-sm sm:rounded-md"
                                 >
                                     Join
                                 </button>

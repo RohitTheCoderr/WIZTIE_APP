@@ -18,11 +18,11 @@ function UserMoreData({ data,style }) {
     // <div className='w-auto m-auto'>
     //   <details className="cursor-pointer">
     //     <summary className="font-bold text-[#55ab9b] py-2 ml-16 ">more Details</summary>
-        <div className=' bg-gray-100 rounded-xl  flex justify-around  flex-wrap'>
+        <div className=' bg-gray-100 rounded-xl flex justify-around flex-wrap'>
           {userFields.map((field, index) => (
-            <div key={index} className={` ${style} px-2 w-[15rem] flex items-center gap-4 rounded-sm h-[2.5rem] my-1`}>
-              <p className='font-bold text-md text-[#55ab9b] font-sans'>{field.label} :</p>
-              <p className='text-sm'>{data[field.key] || "Not Available"}</p>
+            <div key={index} className={` ${style} px-2 w-full sm:w-[15rem] flex items-center gap-2 sm:gap-4 rounded-sm h-[1.5rem] sm:h-[2.5rem] my-1`}>
+              <p className='font-bold text-[14px] sm:text-md text-[#55ab9b] font-sans'>{field.label} :</p>
+              <p className='text-[13px] sm:text-sm'>{data[field.key] || "Not Available"}</p>
               {/* <p>hello</p> */}
             </div>
           ))}

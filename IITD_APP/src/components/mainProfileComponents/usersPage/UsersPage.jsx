@@ -7,7 +7,7 @@ function UsersPage() {
         <>
             {/* <div className='w-full flex bg-gray-100 gap-8 '> */}
                 {/* <SideNavbar /> */}
-                <div className='h-[88vh] overflow-scroll flex gap-5 py-12 '>
+                <div className=' overflow-scroll scrollbar-hide flex gap-5 px-2  pt-12 justify-center flex-wrap '>
                     <UsersProfile />
                     <Connection />
                 </div>
