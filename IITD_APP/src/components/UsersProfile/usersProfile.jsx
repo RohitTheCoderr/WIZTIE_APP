@@ -41,7 +41,7 @@ function UsersProfile() {
                                             </a>
                                         </div>
                                         <div className="flex items-center justify-center">
-                                            <a href={`tel:+${PhoneNumber}`} className="">
+                                            <a href={`tel:+${PhoneNumber}`} target="_blank" rel="noopener noreferrer">
                                                 <FaSquareWhatsapp className="text-[#F1F8E8] text-[1.5rem] sm:text-[2rem]" />
                                             </a>
                                         </div>

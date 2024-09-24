@@ -31,16 +31,13 @@ function ForgetAndChangePassword() {
 
         delete values.phoneNumberOrEmail;
         delete values.confirm_password;
-        console.log("after delete form data", values);
-
         try {
             if (flag1) {
                 if (values.phoneNumber) {
                     values.otpID = otpID;
                 }
-                delete values.otpID
+                // delete values.otpID
                 const response = patchData("/user/change_password", values);
-                console.log("this is response message", response);
                 toast.promise(response, {
                     pending: "password changing.",
                     success: "password changed successfully",
@@ -55,7 +52,6 @@ function ForgetAndChangePassword() {
                     success: "OTP sent",
                     reject: "OTP can't be sent"
                 })
-
                 const otpData = await otpDataPromise
                 setFlag1(otpData?.success);
                 setOtpID(otpData?.data?.otpID);

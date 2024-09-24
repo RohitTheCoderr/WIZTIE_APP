@@ -4,11 +4,6 @@ import React from 'react'
 import { CiSearch } from 'react-icons/ci'
 
 function SideNavbar({res}) {
-
-console.log("hello", res);
-
-
-    
     return (
         <div className={`w-[8rem] sm:w-[15rem] bg-[#fffbfe] h-auto sm:h-[100%] px-1 sm:px-3 pt-6 border-r z-10 absolute sm:relative  ${res ? 'block' : 'hidden'} sm:block`}>
             {/* <div className='text-3xl my-4 font-bold'>LOGO</div> */}

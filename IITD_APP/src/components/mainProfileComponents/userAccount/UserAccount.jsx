@@ -1,9 +1,9 @@
 import UserInfoCard from '@/components/UserInfoCard/UserInfoCard';
 import UserProjectForm from '@/components/UserProjectForm/UserProjectForm';
 import { getData } from '@/services/apiCall';
-import { useGetProfileUserdata, useGetUserdata } from '@/services/zustandStore';
+import { useAuthStore, useGetProfileUserdata, useGetUserdata } from '@/services/zustandStore';
 import { useEffect } from 'react';
-import {  Outlet } from 'react-router-dom';
+import {  Outlet, useNavigate } from 'react-router-dom';
 import UploadDataProject from '../UploadProjectdata/UploadDataProject';
 
 function UserAccount() {
@@ -18,6 +18,15 @@ function UserAccount() {
         });
         return formattedDate;
     };
+
+    const isLoggedin = useAuthStore((state) => state.token);
+    const navigate = useNavigate();
+
+    useEffect(() => {
+        if (!isLoggedin) {
+            navigate("/login");
+        } 
+    }, [isLoggedin, navigate]);
 
     const { userProfileData, setUserProfiledata } = useGetProfileUserdata((state) => state);
     useEffect(() => {
