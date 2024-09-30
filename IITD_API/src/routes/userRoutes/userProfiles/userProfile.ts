@@ -18,7 +18,6 @@ router.route("/all_user_profile")
 router.route("/find_user")
         .post(verifyToken, findUserDataController)
 
-
 router.route("/add_connection")
 .post(verifyToken, addToUserConnectionController)
 

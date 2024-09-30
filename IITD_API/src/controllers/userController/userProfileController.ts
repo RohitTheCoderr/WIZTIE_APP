@@ -217,9 +217,7 @@ const deleteuserProfileController: RequestHandler = async (req: Request, res: Re
 }
 
 
-
-// connection user profile
-
+// ++++++++++++++++++++++++++++  connection user profile  ++++++++++++++++++++++++++++++
 
 // const addToUserConnectionController: RequestHandler = async (req: Request, res: Response, next: NextFunction) => {
 //     try {
@@ -274,7 +272,6 @@ const deleteuserProfileController: RequestHandler = async (req: Request, res: Re
 //     }
 // };
 
-
 const addToUserConnectionController: RequestHandler = async (req: Request, res: Response, next: NextFunction) => {
     try {
         logger.info(`Adding user profile to connections...`);
@@ -284,7 +281,6 @@ const addToUserConnectionController: RequestHandler = async (req: Request, res: 
         if (!userID) {
             return res.status(StatusCodes.BAD_REQUEST).json({ success: false, message: "Missing userID" });
         }
-
         // Query by userId (which is a string) in the database
         const isUserInDB = await userProfileModel.findOne({ userId: userID });
         if (!isUserInDB) {
@@ -325,7 +321,7 @@ const addToUserConnectionController: RequestHandler = async (req: Request, res: 
         logger.error(`Exception occurred at addToUserConnectionController: ${JSON.stringify(error)} `, { __filename });
         next(error);
     }
-};
+}
 
 
 /////////////
@@ -355,6 +351,7 @@ const deleteUserConnectionController: RequestHandler = async (req: Request, res:
         next(error);
     }
 }
+
 
 //////////// getwishlist
 

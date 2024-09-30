@@ -18,12 +18,13 @@ export interface IProfile {
     instagramProfileLink:string
 }
 
-export interface IProfileWhileUpdate extends IProfile {
-    profileId: string
-}
 
 export interface IProfileMul {
     userId: string
     userProfile: IProfile[]
+}
+
+export interface IProfileWhileUpdate extends IProfile {
+    profileId: string
 }
 
