@@ -31,12 +31,18 @@ function ForgetAndChangePassword() {
 
         delete values.phoneNumberOrEmail;
         delete values.confirm_password;
+        delete values.otpID;
+        console.log('sff', values);
+        
         try {
             if (flag1) {
+                console.log('afwrefvdf', values);
                 if (values.phoneNumber) {
                     values.otpID = otpID;
                 }
                 // delete values.otpID
+                console.log("veeedelete forgetpassword", values);
+                
                 const response = patchData("/user/change_password", values);
                 toast.promise(response, {
                     pending: "password changing.",
@@ -59,7 +65,7 @@ function ForgetAndChangePassword() {
             }
         } catch (error) {
             actions.resetForm();
-            alert("An error occurred: " + error?.response?.data?.message);
+            error("An error occurred: " + error?.response?.data?.message);
         }
     }
 
@@ -94,7 +100,7 @@ function ForgetAndChangePassword() {
                             <Button type="submit" name={flag1 ? "Submit" : "Send OTP"} style="w-[100%] my-0 mb-2" />
                             <div className='flex items-center gap-6'>
                                 <span className='text-[16px]'>Go to Login page</span>
-                                <a className='no-underline hover:underline text-[#db4444] text-[13px]'><Link to={"/login"}>Login</Link></a>
+                                <a className='no-underline hover:underline text-[#55AD9B] text-[13px]'><Link to={"/login"}>Login</Link></a>
                             </div>
                         </Form>
                     )}

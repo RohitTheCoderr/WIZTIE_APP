@@ -26,7 +26,7 @@ function UserInfoCard({ profile }) {
                                         ? `data:${profileImg[0]?.contentType};base64,${profileImg[0]?.data}`
                                         : null}
                                     alt={fullName}
-                                    className=' h-full w-full rounded-full'
+                                    className=' h-full w-full rounded-full object-cover'
                                 />
 
                             </div>

@@ -2,11 +2,19 @@
 import React, { useEffect } from "react";
 import { Formik, Form, Field, ErrorMessage } from "formik";
 import { UserProfiledata } from "@/services/lib/YupFormikValidator"; // Assuming the Yup schema is in this file
-import { deleteData, getData, postData } from "@/services/apiCall";
+import { deleteData, getData, patchData, postData } from "@/services/apiCall";
+import { toast } from "react-toastify";
+import { useNavigate } from "react-router-dom";
+import { useGetUserdata } from "@/services/zustandStore";
 
-function UserProfileForm({heading}) {
+function UserProfileForm({ heading }) {
 
-  async function submitForm(values) {
+  const { withimg, setWithimg } = useGetUserdata((state) => state);
+
+  const navigate = useNavigate()
+
+  async function submitForm(values, option) {
+    
     const formData = new FormData();
     // Iterate over each key-value pair in values
     Object.keys(values).forEach((key) => {
@@ -23,19 +31,58 @@ function UserProfileForm({heading}) {
         }
       }
     });
+    // console.log("sssrrr", formData);
+    
+    if (heading) {
+      
+      try {
+        // for updation time
+        // formData.profileId= withimg._id
+        
+        // console.log("myformedit", formData);
+        const updatePromis = patchData("/user/profile/", formData, {
+          headers: { "Content-Type": "multipart/form-data" },
+        });
+        toast.promise(
+          updatePromis, {
+          pending: "profile Updated...",
+          success: "Your profile is Updated Successfully",
+          error: "Your profile is not Updated "
+        }
+        )
+        const data = await updatePromis;
 
-    // Log FormData entries for debugging
-    // for (let pair of formData.entries()) {
-    //   console.log(pair[0] + ": ", pair[1]); 
-    // }
+        // if (data.success) {
+        //   navigate("/")
+        // }
+        option.resetForm()
 
-    try {
-      const userdata = await postData("/user/profile/", formData, {
-        headers: { "Content-Type": "multipart/form-data" },
-      });
-      console.log("User profile data saved", userdata);
-    } catch (error) {
-      console.error("Error:", error);
+      } catch (error) {
+        console.error("Error:", error);
+      }
+    }
+    else {
+      try {
+        const userdataPromis = postData("/user/profile/", formData, {
+          headers: { "Content-Type": "multipart/form-data" },
+        });
+        toast.promise(
+          userdataPromis, {
+          pending: "profile createddd...",
+          success: "Your profile is created Successfully",
+          error: "Your profile is not created "
+        }
+        )
+        const data = await userdataPromis;
+
+        if (data.success) {
+          navigate("/")
+        }
+        option.resetForm()
+
+      } catch (error) {
+        console.error("Error:", error);
+      }
     }
   }
 
@@ -72,7 +119,7 @@ function UserProfileForm({heading}) {
       >
         {({ setFieldValue }) => (
           <Form>
-            <h2 className="text-2xl font-bold mb-6 text-center">{heading ? `${heading}`:"Create"} Profile</h2>
+            <h2 className="text-2xl font-bold mb-6 text-center">{heading ? `${heading}` : "Create"} Profile</h2>
 
             <div className="w-[100%] flex justify-around gap-4 flex-wrap">
 

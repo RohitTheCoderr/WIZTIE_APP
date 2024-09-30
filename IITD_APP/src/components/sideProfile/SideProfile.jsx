@@ -7,6 +7,7 @@ function SideProfile() {
 
     const { removeToken, token } = useAuthStore((state) => state);
     const isLoggedIn = !!token;
+    
     const { userData } = useGetUserdata((state) => state);
 
     const { name, phoneNumber, email } = userData?.data || {};
@@ -25,7 +26,7 @@ function SideProfile() {
                             ? `data:${withimg?.profileImg[0]?.contentType};base64,${withimg?.profileImg[0]?.data}`
                             : null}
                         alt={withimg?.fullName}
-                        className=' h-full w-full rounded-full'
+                        className=' h-full w-full rounded-full object-cover'
                     />
                 </div>
                 <div>

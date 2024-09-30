@@ -88,7 +88,7 @@ function UpdateAdd() {
                             <Button type="submit" name={flag1 ? "Submit" : "Send OTP"} style="w-full my-0 mb-2" />
                             <div className='flex items-center gap-6'>
                                 <span className='text-base'>Go to Sign Up</span>
-                                <Link className='no-underline hover:underline text-red-600 text-sm' to={"/signup"}> Sign up</Link>
+                                <Link className='no-underline hover:underline text-[#55AD9B] text-sm' to={"/signup"}> Sign up</Link>
                             </div>
                         </Form>
                     )}

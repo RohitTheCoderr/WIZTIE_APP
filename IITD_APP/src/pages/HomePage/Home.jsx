@@ -23,8 +23,6 @@ import { useEffect } from "react";
 import { getData } from "@/services/apiCall";
 
 export default function Home() {
-
-
   // for main user data with img
   const { withimg, setWithimg } = useGetUserdata((state) => state);
 

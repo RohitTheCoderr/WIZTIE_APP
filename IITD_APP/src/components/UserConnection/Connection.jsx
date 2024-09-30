@@ -48,9 +48,13 @@ function Connection() {
             console.error("User ID is required");
             return;
         }
+        console.log("userID is", userID);
+        
         try {
             const response = await postData("/user/profile/add_connection", {userID});
             // setSuccess(response?.success)
+            console.log("sssdfoi");
+            
             if (response?.success) {
                 setConnectionStatus((prevState) => ({
                     ...prevState,
