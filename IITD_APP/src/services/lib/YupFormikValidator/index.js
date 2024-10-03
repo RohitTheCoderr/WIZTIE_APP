@@ -241,9 +241,10 @@ const orderForm = {
   }),
 };
 
-const UserForm={
+const UserProjectsForm={
   initialValues:{
     projectName:"",
+    userProjects:"",
     category:"",
     technology:"",
     description:"",
@@ -251,6 +252,7 @@ const UserForm={
 
   validationSchema: Yup.object({
     projectName:projectname,
+    userProjects:uploadValidation,
     category:category,
     technology:technology,
     description:description,
@@ -315,5 +317,5 @@ const UserProfiledata= {
 
 
 
-export { LoginForm, signUpForm, otpForm, sendMessageForm,changePassword,updateAddemailPhoneNumber, productUpload, billingAddress,updateName,orderForm, uploadFolder, UserForm ,UserProfiledata};
+export { LoginForm, signUpForm, otpForm, sendMessageForm,changePassword,updateAddemailPhoneNumber, productUpload, billingAddress,updateName,orderForm, uploadFolder, UserProjectsForm ,UserProfiledata};
 

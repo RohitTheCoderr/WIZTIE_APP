@@ -18,6 +18,7 @@ async function handleResponse(response) {
   }
 }
 
+
 async function apiCall(endpoint, method = "GET", data = null) {
   const url = `${apiUrl}${endpoint}`;
   const token = getToken();
