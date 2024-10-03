@@ -1,4 +1,4 @@
-export interface IProfileconnection  {
-    userId:string;
-    connections:{usersIDs:string, connection:boolean}[];
+export interface IProfileconnection {
+    userId: string;
+    connections: { userIDs: string }[];
 }
