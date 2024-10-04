@@ -9,6 +9,8 @@ import { Link } from 'react-router-dom';
 
 import { useNavigate } from "react-router-dom";
 import { useAuthStore } from "@/services/zustandStore/zustandStore"
+import { LuCaseUpper } from 'react-icons/lu';
+import { toast } from 'react-toastify';
 
 function UpdateAdd() {
     const [flag1, setFlag1] = useState(false);
@@ -35,28 +37,42 @@ function UpdateAdd() {
 
         delete values.phoneNumberOrEmail;
         delete values.confirm_password;
-        console.log("after delete form data", values);
 
         try {
             if (flag1) {
                 if (values.phoneNumber) {
                     values.otpID = otpID;
                 }
-                console.log(flag1);
-                console.log("before hit change url", values);
-                const response = await patchData("/user/phone_or_email_update", values);
-                console.log("this is response message", response);
-                actions.resetForm();
-                alert("Update/ Add PhoneNumber or Email successful 🥰");
+                console.log("value 😒", values);
+                
+                const response = patchData("/user/phone_or_email_update", values);
+                toast.promise(
+                    response, {
+                    pending: "user creating..",
+                    success: "user created successfully..",
+                    reject: "user can't be created.."
+                });
+                const userCreate = await response;
+                navigate("/login")
+                toast("Update/ Add PhoneNumber or Email successful 🥰");
             } else {
-                const otpData = await postData("/user/send_phone_or_email_otp", values);
-                setOtpID(otpData?.data?.otpID);
-                setFlag1(otpData?.success);
-                alert("OTP sent successfully to your phone number or email.");
+                console.log("myoptdata", values);
+                
+                const otpData =  postData("/user/send_phone_or_email_otp", values);
+                toast.promise(
+                    otpData, {
+                    pending: "Opt sending....🫡",
+                    success: "OTP sent successfully to your phone number or email 😉",
+                    reject: "Opt not send 😒"
+                });
+                const OTPCreate = await otpData;
+                if (OTPCreate?.success) {
+                    setOtpID(OTPCreate?.data?.otpID);
+                    setFlag1(OTPCreate?.success);
+                }
             }
         } catch (error) {
-            actions.resetForm();
-            alert("An error occurred: " + error?.response?.data?.message);
+            toast(error?.response?.data?.message);
         }
     }
 

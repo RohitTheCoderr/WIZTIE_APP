@@ -105,13 +105,13 @@ function SignupPage() {
                                     <TextInput label="OTP *" name="otp" type="text" />
                                 </>)}
                             <Button type="submit" name={flag ? "Create Account" : "Send OTP"} style="w-[100%] my-0 mb-2" />
-                            {/* <button className='h-[2rem] sm:h-[2.4rem] md:h-[2.5rem] border-2 w-[100%] rounded-md my-2 flex justify-center gap-4 items-center'>
+                            <button className='h-[2rem] sm:h-[2.4rem] md:h-[2.5rem] border-2 w-[100%] rounded-md my-2 flex justify-center gap-4 items-center'>
                                 <FcGoogle className='text-[30px]' />
                                 <span>Sign up with Google</span>
-                            </button> */}
-                            <div className='list-none flex items-center gap-6'>
-                                <span className='text-[16px]'>Already have an account:</span>
-                                <a className='no-underline hover:underline text-[#55AD9B] text-[13px]'><Link to={"/login"}>Login</Link></a>
+                            </button>
+                            <div className='list-none gap-6 text-center '>
+                                <div className='no-underline hover:underline text-[#55AD9B] text-[13px] my-2'><Link to={"/login"}>Login to your Account</Link></div>
+                                <div className='no-underline hover:underline text-[#55AD9B] text-[13px] my-2'><Link to={"/updateAdd"}>Update Email Or Phone</Link></div>
                             </div>
                         </Form>
                     )}

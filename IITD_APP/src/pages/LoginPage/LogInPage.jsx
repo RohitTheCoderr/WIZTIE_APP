@@ -48,7 +48,7 @@ export default function LogInPage() {
             }
             option.resetForm()
         } catch (error) {
-            toast.warn("An error occurred:" + error?.response?.data?.message)
+            toast.warn(error?.response?.data?.message)
         }
     }
     return (

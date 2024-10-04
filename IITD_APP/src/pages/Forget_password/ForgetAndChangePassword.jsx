@@ -65,7 +65,7 @@ function ForgetAndChangePassword() {
             }
         } catch (error) {
             actions.resetForm();
-            error("An error occurred: " + error?.response?.data?.message);
+            error(error?.response?.data?.message);
         }
     }
 
