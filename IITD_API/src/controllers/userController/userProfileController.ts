@@ -1,9 +1,8 @@
 import { RequestHandler, NextFunction, Request, Response } from "express";
 import { profileWhileUpdateValidator, userProfileValidator } from "@src/validation_schema";
 import { logger } from "@src/logger";
-import { ProfileConnectionModel, userProfileModel } from "@src/models"
+import { userProfileModel } from "@src/models"
 import { StatusCodes } from "http-status-codes";
-// import { required } from "joi";
 
 
 ////////////////
@@ -66,8 +65,6 @@ const addUserProfileController: RequestHandler = async (req: Request, res: Respo
         next(error);
     }
 }
-
-
 ////////////////
 const updateUserProfileController: RequestHandler = async (req: Request, res: Response, next: NextFunction) => {
     try {
@@ -118,8 +115,6 @@ const updateUserProfileController: RequestHandler = async (req: Request, res: Re
         next(error);
     }
 }
-
-
 ////////////////
 const getuserProfileController: RequestHandler = async (req: Request, res: Response, next: NextFunction) => {
     try {
@@ -218,210 +213,4 @@ const deleteuserProfileController: RequestHandler = async (req: Request, res: Re
 
 
 
-// connection user profile
-
-
-// const addToUserConnectionController: RequestHandler = async (req: Request, res: Response, next: NextFunction) => {
-//     try {
-//         logger.info(`Adding users profile to connections...`);
-//         const { userID } = req.body;
-//         const userId = (req as any).userId;
-
-//         if (!userID) {
-//             return res.status(StatusCodes.BAD_REQUEST).json({ success: false, message: "Missing userID" });
-//         }
-
-//         const isUserInDB = await userProfileModel.findById(userID);
-//         if (!isUserInDB) {
-//             return res.status(StatusCodes.BAD_REQUEST).json({ success: false, message: "User not available for connections" });
-//         }
-
-//         const isUserAddedConnectionsAlready = await ProfileConnectionModel.findOne({ userId });
-
-//         if (!isUserAddedConnectionsAlready) {
-//             // Add product to wishlist for the first time
-//             logger.info(`Adding user to connection for the first time...`);
-//             await ProfileConnectionModel.create({
-//                 userId,
-//                 connections: [{ usersIDs:userID, connection: true }]
-//             });
-//             return res.status(StatusCodes.CREATED).json({ success: true, message: "Added first user profile to connections" });
-//         } else {
-//             logger.info(`Updating profile in connections...`);
-
-//             // Update the wishlist if the product already exists
-//             const updateResult = await ProfileConnectionModel.updateOne({
-//                 userID,
-//                 'connetions.userIDs': userID
-//             }, {
-//                 $set: { 'connetions.$.connection': true }
-//             });
-
-//             // If the user profile was not found in the connections, add it to the connections array
-//             if (updateResult.matchedCount === 0) {
-//                 await ProfileConnectionModel.updateOne(
-//                     { userID },
-//                     { $addToSet: { connections: { userIDs:userID, connection: true } } }
-//                 );
-//                 return res.status(StatusCodes.CREATED).json({ success: true, message: "profile added to connections" });
-//             }
-
-//             return res.status(StatusCodes.OK).json({ success: true, message: "profile updated in connections" });
-//         }
-//     } catch (error) {
-//         logger.error(`Exception occurred at addToUserConnectionController: ${JSON.stringify(error)} `, { __filename });
-//         next(error);
-//     }
-// };
-
-
-const addToUserConnectionController: RequestHandler = async (req: Request, res: Response, next: NextFunction) => {
-    try {
-        logger.info(`Adding user profile to connections...`);
-        const { userID } = req.body;  // This comes from the request body
-        const userId = (req as any).userId;  // This is the ID of the currently authenticated user
-
-        if (!userID) {
-            return res.status(StatusCodes.BAD_REQUEST).json({ success: false, message: "Missing userID" });
-        }
-
-        // Query by userId (which is a string) in the database
-        const isUserInDB = await userProfileModel.findOne({ userId: userID });
-        if (!isUserInDB) {
-            return res.status(StatusCodes.BAD_REQUEST).json({ success: false, message: "User not available for connections" });
-        }
-
-        const existingConnection = await ProfileConnectionModel.findOne({ userId });
-
-        if (!existingConnection) {
-            // Adding user to connections for the first time
-            logger.info(`Adding user to connection for the first time...`);
-            await ProfileConnectionModel.create({
-                userId,
-                connections: [{ usersIDs: userID, connection: true }]
-            });
-            return res.status(StatusCodes.CREATED).json({ success: true, message: "First user profile added to connections" });
-        } else {
-            logger.info(`Updating profile in connections...`);
-
-            // Check if the user is already in the connections array
-            const updateResult = await ProfileConnectionModel.updateOne(
-                { userId, 'connections.usersIDs': userID },
-                { $set: { 'connections.$.connection': true } }
-            );
-
-            // If the user profile was not found in the connections, add it
-            if (updateResult.matchedCount === 0) {
-                await ProfileConnectionModel.updateOne(
-                    { userId },
-                    { $addToSet: { connections: { usersIDs: userID, connection: true } } }
-                );
-                return res.status(StatusCodes.CREATED).json({ success: true, message: "Profile added to connections" });
-            }
-
-            return res.status(StatusCodes.OK).json({ success: true, message: "Profile updated in connections" });
-        }
-    } catch (error) {
-        logger.error(`Exception occurred at addToUserConnectionController: ${JSON.stringify(error)} `, { __filename });
-        next(error);
-    }
-};
-
-
-/////////////
-const deleteUserConnectionController: RequestHandler = async (req: Request, res: Response, next: NextFunction) => {
-    try {
-        logger.info(`Remove user profile to connections...`);
-        const { userID } = req?.body
-        const userId = (req as any).userId
-
-        if (!userID) {
-            res.status(StatusCodes.BAD_GATEWAY).json({ success: false, message: "please provide userID" });
-        }
-
-        logger.info(`updating Connections....`);
-
-        const updateResult = await ProfileConnectionModel.updateOne(
-            { userId },
-            { $pull: { connections: { usersIDs: userID } } }
-        );
-
-        if (updateResult.modifiedCount === 0) {
-            return res.status(StatusCodes.BAD_REQUEST).json({ success: false, message: "user profile not found.." });
-        }
-        return res.status(StatusCodes.OK).json({ success: true, message: "user profile remove from connections..." });
-    } catch (error) {
-        logger.error(`Exception occurred at deleteUserConnectionController: ${JSON.stringify(error)} `, { __filename });
-        next(error);
-    }
-}
-
-//////////// getwishlist
-
-// const getUserConnectionsController: RequestHandler = async (req: Request, res: Response, next: NextFunction) => {
-//     try {
-//         logger.info(`getting user Connections...`);
-
-//         const userId = (req as any).userId
-//         const userConnections = await ProfileConnectionModel.findOne({ userId }).lean();
-
-//         if (!userConnections) {
-//             return res.status(StatusCodes.OK).json({ success: false, message: "Not Found anything in connections" })
-//         };
-
-//         const connectionPromises = userConnections?.connections?.map(async user => {
-//             const SingleUser = await userProfileModel.findById(user?.usersIDs).lean();
-//             logger.info(`${JSON.stringify(SingleUser)} `, { __filename })
-//             return { ...SingleUser, profileConnection: user?.connection }
-//         });
-
-//         const products = await Promise.all(connectionPromises);
-
-//         return res.status(StatusCodes.OK).json({ success: true, message: "fetched wishlist products...", data: { products } });
-//     } catch (error) {
-//         logger.error(`Exception occurred at getUserConnectionsController: ${JSON.stringify(error)} `, { __filename });
-//         next(error);
-//     }
-// }
-
-const getUserConnectionsController: RequestHandler = async (req: Request, res: Response, next: NextFunction) => {
-    try {
-        logger.info(`Getting user connections...`);
-
-        const userId = (req as any).userId;
-        const userConnections = await ProfileConnectionModel.findOne({ userId }).lean();
-
-        if (!userConnections) {
-            return res.status(StatusCodes.OK).json({ success: false, message: "No connections found" });
-        }
-
-        const connectionPromises = userConnections?.connections?.map(async (user) => {
-            logger.info(`Fetching profile for userID: ${user?.usersIDs}`);
-
-            // Fetch the user profile
-            const singleUser = await userProfileModel.findOne({ userId: user?.usersIDs }).lean();
-            if (!singleUser) {
-                logger.warn(`User profile not found for userID: ${user?.usersIDs}`);
-            }
-            return {
-                ...singleUser,
-                profileConnection: user?.connection
-            };
-        });
-        // // Resolve all the promises
-        const connections = await Promise.all(connectionPromises);
-
-        return res.status(StatusCodes.OK).json({
-            success: true,
-            message: "Fetched user connections",
-            data: { connections }
-        });
-
-    } catch (error) {
-        logger.error(`Exception occurred at getUserConnectionsController: ${JSON.stringify(error)} `, { __filename });
-        next(error);
-    }
-};
-
-
-export { addUserProfileController, updateUserProfileController, getuserProfileController, getAlluserProfileController, deleteuserProfileController, findUserDataController, addToUserConnectionController, deleteUserConnectionController, getUserConnectionsController }
+export { addUserProfileController, updateUserProfileController, getuserProfileController, getAlluserProfileController, deleteuserProfileController, findUserDataController,  }

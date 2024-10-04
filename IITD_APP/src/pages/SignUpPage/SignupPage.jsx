@@ -111,7 +111,7 @@ function SignupPage() {
                             </button> */}
                             <div className='list-none flex items-center gap-6'>
                                 <span className='text-[16px]'>Already have an account:</span>
-                                <a className='no-underline hover:underline text-[#db4444] text-[13px]'><Link to={"/login"}>Login</Link></a>
+                                <a className='no-underline hover:underline text-[#55AD9B] text-[13px]'><Link to={"/login"}>Login</Link></a>
                             </div>
                         </Form>
                     )}

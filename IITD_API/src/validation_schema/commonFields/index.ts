@@ -8,15 +8,18 @@ function required_String_NotEmpty(fieldName: string) {
 }
 
 // // Function to validate either a string (URL) or a file
-// function required_FileOrString(fieldName: string) {
-//     return Joi.alternatives()
-//         .try(Joi.string(), Joi.object().instance(File))
-//         .messages({
-//             'alternatives.match': `${fieldName} must be either a URL or a file`,
-//         });
-// }
+function required_FileOrString(fieldName: string) {
+    return Joi.alternatives()
+        .try(Joi.string(), Joi.object().instance(File))
+        .messages({
+            'alternatives.match': `${fieldName} must be either a folder or a file`,
+        });
+}
+ const userProjects=required_FileOrString("projets")
 
-
+ const projets={
+    userProjects
+ }
 
 
 const fullName = required_String_NotEmpty("fullName");
@@ -76,4 +79,4 @@ const userprofile = {
 }
 
 
-export { required_String_NotEmpty , address , userprofile}
+export { required_String_NotEmpty , address , userprofile,projets}

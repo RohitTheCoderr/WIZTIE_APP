@@ -17,16 +17,17 @@ const profileConnection = new Schema<IProfileconnection>({
     userId: {
         type: String,
         required: true,
-        unique: true
     },
-    connections: [{
-        usersIDs: {
-            type: String,
-            required: true,
-            unique: true
-        }, connection: { type: Boolean, required: true }
-    }]
-})
-const ProfileConnectionModel=model<IProfileconnection>("userConnections", profileConnection)
+    connections: [
+        {
+            userIDs: {
+                type: String,
+                required: true,
+            }
+        }
+    ]
+});
+
+const ProfileConnectionModel = model<IProfileconnection>("userConnections", profileConnection);
 
 export { userProfileModel, ProfileConnectionModel }

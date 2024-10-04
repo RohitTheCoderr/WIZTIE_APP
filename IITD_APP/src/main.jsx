@@ -18,6 +18,7 @@ import UserProjectForm from './components/UserProjectForm/UserProjectForm.jsx';
 import ChatWithCommections from './components/mainProfileComponents/ChatWithMyConnection/ChatWithCommections.jsx';
 import ChatWindow from './components/chatWindow/Chatwindow.jsx';
 import EditProfile from './components/mainProfileComponents/EditProfile/EditProfile.jsx';
+import Create_Profile from './pages/create_profilePage/Create_Profile.jsx';
 
 const router = createBrowserRouter([
   {
@@ -27,6 +28,10 @@ const router = createBrowserRouter([
       {
         path: "/",
         element: <Home />,
+      },
+      {
+        path: "/create_profile",
+        element: <Create_Profile />,
       },
       
       // {

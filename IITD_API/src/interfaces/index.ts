@@ -16,3 +16,6 @@ export * from "@src/interfaces/userProfileInterface/profileConnectionInterface"
 
 
 // order and orderHistory
+
+// projects 
+export * from "@src/interfaces/projectsInterface/projectsInterface"

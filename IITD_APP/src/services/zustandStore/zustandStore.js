@@ -1,3 +1,6 @@
+
+
+
 import { create } from "zustand";
 import { devtools, persist } from "zustand/middleware";
 
@@ -12,6 +15,7 @@ const useAuthStore = create(
   devtools(
     persist(authStore, {
       name: "token",
+  //  storage: () => localStorage,
       getStorage: () => localStorage,
     })
   )
@@ -28,6 +32,7 @@ const getCount = (set) => ({
 const useGetCount = create(
   devtools(getCount, {
     name: "count",
+//  storage: () => localStorage,
     getStorage: () => localStorage,
   })
 );
@@ -46,6 +51,7 @@ const useGetUserdata = create(
   devtools(getUserdata, {
     name: "userData",
     withimg:"withimg",
+//  storage: () => sessionStorage,
     getStorage: () => sessionStorage,
   })
 );
@@ -61,6 +67,7 @@ const getUserProfiledata = (set) => ({
 const useGetProfileUserdata = create(
   devtools(getUserProfiledata, {
     name: "userProfileData",
+//  storage: () => sessionStorage,
     getStorage: () => sessionStorage,
   })
 );
@@ -76,6 +83,7 @@ const getAllUserProfiledata = (set) => ({
 const useGetALLProfileUserdata = create(
   devtools(getAllUserProfiledata, {
     name: "alluserProfileData",
+//  storage: () => sessionStorage,
     getStorage: () => sessionStorage,
   })
 );
@@ -90,6 +98,7 @@ const getMyConnections= (set) => ({
 const useGettingMyConnectionsZustand = create(
   devtools(getMyConnections, {
     name: "myConnections",
+//  storage: () => sessionStorage,
     getStorage: () => sessionStorage,
   })
 );
@@ -103,6 +112,7 @@ const getShow = (set) => ({
 const useGetShow = create(
   devtools(getShow, {
     name: "show",
+//  storage: () => localStorage,
     getStorage: () => localStorage,
   })
 );
@@ -115,6 +125,7 @@ const getShowmore = (set) => ({
 const useGetShowmore = create(
   devtools(getShowmore, {
     name: "show",
+//  storage: () => localStorage,
     getStorage: () => localStorage,
   })
 );

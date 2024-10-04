@@ -1,8 +1,5 @@
 import { RequestHandler, NextFunction, Request, Response } from "express";
-import {
-  loginValidator, signUpValidator, ChangePasswordValidator,
-  updatePhoneOrEmailValidator, updateNameValidator
-} from "@src/validation_schema";
+import {loginValidator, signUpValidator, ChangePasswordValidator,updatePhoneOrEmailValidator, updateNameValidator} from "@src/validation_schema";
 import { logger } from "@src/logger";
 import { verifyHashedPassword } from "@src/services/lib/bcrypt"
 import { UserModel } from "@src/models"

@@ -1,7 +1,8 @@
 import { Router } from "express";
-import { addUserProfileController, getuserProfileController,updateUserProfileController, getAlluserProfileController, deleteuserProfileController, findUserDataController, addToUserConnectionController, deleteUserConnectionController, getUserConnectionsController } from "@src/controllers/userController/userProfileController"
+import { addUserProfileController, getuserProfileController,updateUserProfileController, getAlluserProfileController, deleteuserProfileController, findUserDataController,} from "@src/controllers/userController/userProfileController"
 import { verifyToken } from "@src/middlewares";
 import { upload } from "@src/services/lib/multer"
+import { addToUserConnectionController, deleteUserConnectionController, getUserConnectionsController } from "@src/controllers";
 
 const router = Router()
 router.route("/")
@@ -17,7 +18,9 @@ router.route("/all_user_profile")
     
 router.route("/find_user")
         .post(verifyToken, findUserDataController)
+        
 
+//=================== connections   =====================
 
 router.route("/add_connection")
 .post(verifyToken, addToUserConnectionController)

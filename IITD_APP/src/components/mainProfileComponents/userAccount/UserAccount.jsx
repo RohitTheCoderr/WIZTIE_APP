@@ -18,14 +18,20 @@ function UserAccount() {
         });
         return formattedDate;
     };
-
+    
     const isLoggedin = useAuthStore((state) => state.token);
+    const { withimg, setWithimg } = useGetUserdata((state) => state);
     const navigate = useNavigate();
 
     useEffect(() => {
-        if (!isLoggedin) {
+        if (!isLoggedin ) {
             navigate("/login");
         } 
+        else if(!withimg) {
+            navigate("/create_profile")
+        } else {
+            
+        }
     }, [isLoggedin, navigate]);
 
     const { userProfileData, setUserProfiledata } = useGetProfileUserdata((state) => state);
@@ -54,7 +60,8 @@ function UserAccount() {
     //     }
     // }
 
-    const { withimg, setWithimg } = useGetUserdata((state) => state);
+
+
     const { fullName} = userProfileData || {};
     return (
         // <div className='h-[86vh] w-full m-auto flex justify-between bg-gray-100 '>

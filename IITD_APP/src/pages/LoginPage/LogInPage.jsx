@@ -41,6 +41,8 @@ export default function LogInPage() {
             const data = await myPromise;
 
             if (data.success) {
+                console.log("token in login", data?.data?.token);
+                
                 setToken(data?.data?.token)
                 navigate("/")
             }
@@ -69,13 +71,11 @@ export default function LogInPage() {
                             <div className='flex justify-between items-center my-[1.2rem]'>
                                 <Button type="submit" name={"Log In"} style={"w-[5.5rem]"} />
                                 <div className="">
-                                    <li className='list-none no-underline hover:underline text-[#db4444] text-[13px]'><Link to={"/forgetpassword"}>Forget password ?</Link></li>
+                                    <li className='list-none no-underline hover:underline text-[#55AD9B] text-[13px] my-2'><Link to={"/forgetpassword"}>Forget password ?</Link></li>
+                                    <li className='list-none no-underline hover:underline text-[#55AD9B] text-[13px] my-2'><Link to={"/signup"}>Create Account</Link></li>
                                 </div> 
+                                
                             </div>
-                                <div className=" flex text-sm  justify-between px-2">
-                                    Create Account:👉 
-                                    <li className='list-none no-underline hover:underline text-[#db4444] text-[13px]'><Link to={"/signup"}>Click here </Link></li>
-                                </div>
                         </Form>
                     )}
                 </Formik>

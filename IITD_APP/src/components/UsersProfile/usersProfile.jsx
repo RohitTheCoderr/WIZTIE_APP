@@ -23,7 +23,7 @@ function UsersProfile() {
                                                     ? `data:${profileImg[0]?.contentType};base64,${profileImg[0]?.data}`
                                                     : null}
                                                 alt={fullName}
-                                                className=' h-full w-full rounded-lg sm:rounded-xl '
+                                                className=' h-full w-full object-cover rounded-lg sm:rounded-xl '
                                             />
                                         </div>
                                         <h1 className=" text-[13px] sm:text-sm font-bold">{fullName}</h1>

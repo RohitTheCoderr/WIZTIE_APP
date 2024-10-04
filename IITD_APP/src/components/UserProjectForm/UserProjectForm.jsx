@@ -1,10 +1,9 @@
-
 import React from "react";
 import { Formik, Form, Field } from "formik";
-import { UserForm } from "@/services/lib/YupFormikValidator";
-
-
-
+import JSZip from "jszip";  // To handle zipping files
+import { UserProjectsForm } from "@/services/lib/YupFormikValidator";
+import { toast } from "react-toastify";
+import { patchData, postData } from "@/services/apiCall";
 
 const categoryOptions = [
   { value: '', label: '' },
@@ -49,83 +48,170 @@ const technologyOptions = [
 ];
 
 const UserProjectForm = () => {
-  async function UserForm(values,action) {
-    console.log('valuess',values)
-    action.resetForm()
- }
+  // Handle form submission
+  async function UserForm(values, actions) {
+    console.log('Form values:', values);
+
+    // Create a new instance of JSZip
+    const zip = new JSZip();
+
+    // Check if userProjects contain files
+    if (values.userProjects && values.userProjects.length > 0) {
+        // Add uploaded files to the zip archive
+        Array.from(values.userProjects).forEach((file) => {
+            zip.file(file.name, file); // Ensure `file` is a File object
+        });
+
+        // Generate the zip archive asynchronously
+        const zipBlob = await zip.generateAsync({ type: "blob" });
+        console.log("Zipped Files Blob:", zipBlob);
+
+        // Prepare form data for the upload
+        const formData = new FormData();
+        formData.append("userProjects", zipBlob, "projects.zip"); // Append the zipped file with a name
+
+        // Add userId to the formData
+        const userId = "66f294dd8dd6910bcf37236a"; // Replace with dynamic userId as needed
+        formData.append("userId", userId); // Append userId to FormData
+
+        // Prepare project details as an object
+        const projectDetails = {
+            projectName: values.projectName, // Ensure this comes from your form
+            category: values.category,
+            technology: values.technology,
+            description: values.description,
+        };
+
+        // Append the project details directly to the userProjects array in the formData
+        formData.append("userProjects[0][projectName]", projectDetails.projectName);
+        formData.append("userProjects[0][category]", projectDetails.category);
+        formData.append("userProjects[0][technology]", projectDetails.technology);
+        formData.append("userProjects[0][description]", projectDetails.description);
+
+        console.log("Before upload:", values);
+        try {
+            const uploadPromise = postData("/user/projects/", formData, {
+                headers: { "Content-Type": "multipart/form-data" },
+            });
+
+            toast.promise(
+                uploadPromise, {
+                    pending: "Project uploading...",
+                    success: "Your project is uploaded successfully!",
+                    error: "Your project could not be uploaded.",
+                }
+            );
+
+            const data = await uploadPromise;
+            console.log("After uploaded:", data);
+
+            // Handle successful upload
+            if (data.success) {
+                actions.resetForm(); // Reset the form after successful upload
+                // Optionally navigate to another page or show success message
+                // navigate("/");
+            }
+
+        } catch (error) {
+            console.error("Error during upload:", error);
+        }
+    } else {
+        console.error("No files selected to upload.");
+    }
+}
+  // Handle file uploads and zip them before submission
+  const handleFileUpload = (event, setFieldValue) => {
+    const files = event.currentTarget.files;
+    setFieldValue("userProjects", files);  // Store the files in Formik's state
+  };
 
   return (
     <Formik
-      initialValues={UserForm.initialValues}
-      validationSchema={UserForm.validationSchema}
-      // onSubmit={handleSubmit}
+      initialValues={UserProjectsForm.initialValues}
+      validationSchema={UserProjectsForm.validationSchema}
+      onSubmit={UserForm}
     >
-      <div className="max-w-md mx-auto  p-8 bg-white shadow-md rounded-lg border-gray-500">
-        <h2 className="text-2xl font-bold mb-6 text-center">Create</h2>
+      {({ setFieldValue }) => (
         <Form>
-          <div className="mb-4">
-            <label className="block text-gray-700 font-bold" htmlFor="name">
-              Project Name
-            </label>
-            <Field
-              type="text"
-              name="name"
-              className="w-full px-3 py-2 border-b-2 border-gray-300 rounded-md focus:border-blue-500 outline-none"
-              placeholder="Enter project name"
-            />
-          </div>
-          <div className="mb-4">
-            <label className="block text-gray-700 font-bold" htmlFor="category">
-              Category
-            </label>
-            <Field
-              as="select"
-              name="category"
-              className="w-full px-3 py-2 border-b-2 border-gray-300 rounded-md focus:border-[#3e9180] outline-none"
+          <div className="max-w-md mx-auto p-8 bg-white shadow-md rounded-lg border-gray-500">
+            <h2 className="text-2xl font-bold mb-6 text-center">Create Project</h2>
+            <div className="mb-4">
+              <label className="block text-gray-700 font-bold" htmlFor="projectName">
+                Project Name
+              </label>
+              <Field
+                type="text"
+                name="projectName"
+                className="w-full px-3 py-2 border-b-2 border-gray-300 rounded-md focus:border-blue-500 outline-none"
+                placeholder="Enter project name"
+              />
+            </div>
+            <div className="mb-4">
+              <label className="block text-gray-700 font-bold" htmlFor="category">
+                Category
+              </label>
+              <Field
+                as="select"
+                name="category"
+                className="w-full px-3 py-2 border-b-2 border-gray-300 rounded-md focus:border-[#3e9180] outline-none"
+              >
+                {categoryOptions.map((option) => (
+                  <option key={option.value} value={option.value}>
+                    {option.label}
+                  </option>
+                ))}
+              </Field>
+            </div>
+            <div className="mb-6">
+              <label className="block text-gray-700 font-bold" htmlFor="technology">
+                Technology Use
+              </label>
+              <Field
+                as="select"
+                name="technology"
+                className="w-full px-3 py-2 border-b-2 border-gray-300 rounded-md focus:border-[#3e9180] outline-none"
+              >
+                {technologyOptions.map((option) => (
+                  <option key={option.value} value={option.value}>
+                    {option.label}
+                  </option>
+                ))}
+              </Field>
+            </div>
+            <div className="mb-6">
+              <label className="block text-gray-700 font-bold" htmlFor="description">
+                Description
+              </label>
+              <Field
+                as="textarea"
+                name="description"
+                className="w-full px-3 py-2 border-b-2 border-gray-300 focus:border-[#3e9180] outline-none rounded-md"
+                placeholder="Enter description"
+                rows="4"
+              />
+            </div>
+            <div className="mb-6">
+              <label className="block text-gray-700 font-bold" htmlFor="userProjects">
+                Upload Files/Folders (Zipped)
+              </label>
+              <input
+                type="file"
+                name="userProjects"
+                webkitdirectory="true"  // To allow folder selection
+                multiple  // Allow multiple file uploads
+                onChange={(event) => handleFileUpload(event, setFieldValue)}
+                className="w-full px-3 py-2 border-b-2 border-gray-300 focus:border-[#3e9180] outline-none rounded-md"
+              />
+            </div>
+            <button
+              type="submit"
+              className="w-full py-2 bg-[#55AD9B] text-white font-bold rounded-md hover:bg-[#3e9180]"
             >
-              {categoryOptions.map((option) => (
-                <option key={option.value} value={option.value}>
-                  {option.label}
-                </option>
-              ))}
-            </Field>
+              Submit
+            </button>
           </div>
-          <div className="mb-6">
-            <label className="block text-gray-700 font-bold" htmlFor="technologyUse">
-              Technology Use
-            </label>
-            <Field
-              as="select"
-              name="technologyUse"
-              className="w-full px-3 py-2 border-b-2 border-gray-300 rounded-md focus:border-[#3e9180] outline-none"
-            >
-              {technologyOptions.map((option) => (
-                <option key={option.value} value={option.value}>
-                  {option.label}
-                </option>
-              ))}
-            </Field>
-          </div>
-          <div className="mb-6">
-            <label className="block text-gray-700 font-bold" htmlFor="description">
-              Description
-            </label>
-            <Field
-              as="textarea"
-              name="description"
-              className="w-full px-3 py-2 border-b-2 border-gray-300 focus:border-[#3e9180] outline-none rounded-md"
-              placeholder="Enter description"
-              rows="4"
-            />
-          </div>
-          <button
-            type="submit"
-            className="w-full py-2 bg-[#55AD9B] text-white font-bold rounded-md hover:bg-[#3e9180]"
-          >
-            Submit
-          </button>
         </Form>
-      </div>
+      )}
     </Formik>
   );
 };
